@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>tenecnt&#39;s blog</title>
+  
+  <subtitle>2333</subtitle>
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="http://tenecnt.github.io/"/>
+  <updated>2018-07-14T08:26:17.605Z</updated>
+  <id>http://tenecnt.github.io/</id>
+  
+  <author>
+    <name>tenecnt</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Helloworld</title>
+    <link href="http://tenecnt.github.io/2018/07/14/Helloworld/"/>
+    <id>http://tenecnt.github.io/2018/07/14/Helloworld/</id>
+    <published>2018-07-14T00:19:15.000Z</published>
+    <updated>2018-07-14T08:26:17.605Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="第二次转移博客"><a href="#第二次转移博客" class="headerlink" title="第二次转移博客"></a>第二次转移博客</h1><p>$ /sqrt{/phi} $<br>$${ 1 + 1 = 2 }$$<br>Simple inline $a = b + c$</p><p>$$ \frac{\partial u}{\partial t}<br>= h^2 \left( \frac{\partial^2 u}{\partial x^2} +<br>\frac{\partial^2 u}{\partial y^2} +<br>\frac{\partial^2 u}{\partial z^2}\right) $$</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;第二次转移博客&quot;&gt;&lt;a href=&quot;#第二次转移博客&quot; class=&quot;headerlink&quot; title=&quot;第二次转移博客&quot;&gt;&lt;/a&gt;第二次转移博客&lt;/h1&gt;&lt;p&gt;$ /sqrt{/phi} $&lt;br&gt;$${ 1 + 1 = 2 }$$&lt;br&gt;Simple inl
+      
+    
+    </summary>
+    
+    
+      <category term="试验" scheme="http://tenecnt.github.io/tags/%E8%AF%95%E9%AA%8C/"/>
+    
+      <category term="math" scheme="http://tenecnt.github.io/tags/math/"/>
+    
+  </entry>
+  
+</feed>
