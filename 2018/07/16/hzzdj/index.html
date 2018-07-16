@@ -3,23 +3,23 @@
 <head>
   <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
   
-  <title>Helloworld | tenecnt&#39;s blog</title>
+  <title>后缀自动机 | tenecnt&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
     <meta name="keywords" content="2333" />
   
-  <meta name="description" content="第二次转移博客$ \sqrt{\phi} $ {1+1=2}{\fac 1}Simple inline $a = b + c$ \frac{\partial u}{\partial t} = h^2 \left( \frac{\partial^2 u}{\partial x^2} + \frac{\partial^2 u}{\partial y^2} + \frac{\partial^2 u}{\">
-<meta name="keywords" content="试验,math">
+  <meta name="description" content="转移重要代码1234567891011121314151617181920212223242526272829303132333435363738char c[MN];int n,tot=0;struct Node&amp;#123;	int maxlen,slink,tran[26];&amp;#125;N[MN];int Nd(int _maxlen,int _tran,int _slink)&amp;#123;	N">
+<meta name="keywords" content="字符串">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Helloworld">
-<meta property="og:url" content="http://tenecnt.github.io/2018/07/14/Helloworld/index.html">
+<meta property="og:title" content="后缀自动机">
+<meta property="og:url" content="http://tenecnt.github.io/2018/07/16/hzzdj/index.html">
 <meta property="og:site_name" content="tenecnt&#39;s blog">
-<meta property="og:description" content="第二次转移博客$ \sqrt{\phi} $ {1+1=2}{\fac 1}Simple inline $a = b + c$ \frac{\partial u}{\partial t} = h^2 \left( \frac{\partial^2 u}{\partial x^2} + \frac{\partial^2 u}{\partial y^2} + \frac{\partial^2 u}{\">
+<meta property="og:description" content="转移重要代码1234567891011121314151617181920212223242526272829303132333435363738char c[MN];int n,tot=0;struct Node&amp;#123;	int maxlen,slink,tran[26];&amp;#125;N[MN];int Nd(int _maxlen,int _tran,int _slink)&amp;#123;	N">
 <meta property="og:locale" content="中文">
-<meta property="og:updated_time" content="2018-07-16T04:45:10.272Z">
+<meta property="og:updated_time" content="2018-07-15T18:28:27.521Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Helloworld">
-<meta name="twitter:description" content="第二次转移博客$ \sqrt{\phi} $ {1+1=2}{\fac 1}Simple inline $a = b + c$ \frac{\partial u}{\partial t} = h^2 \left( \frac{\partial^2 u}{\partial x^2} + \frac{\partial^2 u}{\partial y^2} + \frac{\partial^2 u}{\">
+<meta name="twitter:title" content="后缀自动机">
+<meta name="twitter:description" content="转移重要代码1234567891011121314151617181920212223242526272829303132333435363738char c[MN];int n,tot=0;struct Node&amp;#123;	int maxlen,slink,tran[26];&amp;#125;N[MN];int Nd(int _maxlen,int _tran,int _slink)&amp;#123;	N">
   
   
     <link rel="icon" href="/favicon.ico">
@@ -115,20 +115,20 @@ ga('send', 'pageview');
     </div>
 </header>
       <div class="outer">
-        <section id="main" class="body-wrap"><article id="post-Helloworld" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main" class="body-wrap"><article id="post-hzzdj" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="post-title" itemprop="name">
-      Helloworld
+      后缀自动机
     </h1>
     <div class="post-title-bar">
       <ul>
           
         <li>
-          <i class="fa fa-calendar"></i>  2018-07-14
+          <i class="fa fa-calendar"></i>  2018-07-16
         </li>
         <li>
           <i class="fa fa-eye"></i>
@@ -144,16 +144,12 @@ ga('send', 'pageview');
     <div class="article-entry post-content" itemprop="articleBody">
       
             
-            <h1 id="第二次转移博客"><a href="#第二次转移博客" class="headerlink" title="第二次转移博客"></a>第二次转移博客</h1><p>$ \sqrt{\phi} $</p>
-<script type="math/tex; mode=display">{1+1=2}</script><script type="math/tex; mode=display">{\fac 1}</script><p>Simple inline $a = b + c$</p>
-<script type="math/tex; mode=display">\frac{\partial u}{\partial t}
-= h^2 \left( \frac{\partial^2 u}{\partial x^2} +
-\frac{\partial^2 u}{\partial y^2} +
-\frac{\partial^2 u}{\partial z^2}\right)</script>
+            <h2 id="转移重要代码"><a href="#转移重要代码" class="headerlink" title="转移重要代码"></a>转移重要代码</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">char</span> c[MN];</span><br><span class="line"><span class="keyword">int</span> n,tot=<span class="number">0</span>;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Node</span>&#123;</span></span><br><span class="line">	<span class="keyword">int</span> maxlen,slink,tran[<span class="number">26</span>];</span><br><span class="line">&#125;N[MN];</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">Nd</span><span class="params">(<span class="keyword">int</span> _maxlen,<span class="keyword">int</span> _tran,<span class="keyword">int</span> _slink)</span></span>&#123;</span><br><span class="line">	N[++tot]=(Node)&#123;_maxlen,_slink,<span class="number">0</span>&#125;;</span><br><span class="line">	<span class="keyword">if</span>(_tran)&#123;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;<span class="number">26</span>;++i)<span class="keyword">if</span>(N[_tran].tran[i])N[tot].tran[i]=N[_tran].tran[i];<span class="keyword">else</span> N[tot].tran[i]=<span class="number">0</span>;</span><br><span class="line">	&#125;<span class="keyword">else</span> <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;<span class="number">26</span>;++i)N[tot].tran[i]=<span class="number">0</span>;</span><br><span class="line">	<span class="keyword">return</span> tot;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">addchar</span><span class="params">(<span class="keyword">char</span> cc,<span class="keyword">int</span> u)</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> ch=cc-<span class="string">'a'</span>;</span><br><span class="line">	<span class="keyword">int</span> z=Nd(N[u].maxlen+<span class="number">1</span>,<span class="number">0</span>,<span class="number">0</span>);</span><br><span class="line">	<span class="keyword">int</span> v=u;</span><br><span class="line">	<span class="keyword">while</span>(v&amp;&amp;!N[v].tran[ch])&#123;</span><br><span class="line">		N[v].tran[ch]=z;</span><br><span class="line">		v=N[v].slink;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span>(!v)&#123;N[z].slink=<span class="number">1</span>;<span class="keyword">return</span> z;&#125;</span><br><span class="line">	<span class="keyword">int</span> x=N[v].tran[ch];</span><br><span class="line">	<span class="keyword">if</span>(N[v].maxlen==N[x].maxlen<span class="number">-1</span>)&#123;</span><br><span class="line">		N[z].slink=x;</span><br><span class="line">		<span class="keyword">return</span> z;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">int</span> y=Nd(N[v].maxlen+<span class="number">1</span>,x,N[x].slink);</span><br><span class="line">	N[x].slink=y;N[z].slink=y;</span><br><span class="line">	<span class="keyword">while</span>(v&amp;&amp;N[v].tran[ch]==x)&#123;</span><br><span class="line">		N[v].tran[ch]=y;</span><br><span class="line">		v=N[v].slink;</span><br><span class="line">	&#125;<span class="keyword">return</span> z;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">insert</span><span class="params">()</span></span>&#123;</span><br><span class="line">	Nd(<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>);</span><br><span class="line">	<span class="keyword">int</span> now=<span class="number">1</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;++i)&#123;now=addchar(c[i],now);&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
             <div class="post-copyright">
     <div class="content">
-        <p>最后更新： 2018年07月16日 12:45</p>
-        <p>原始链接： <a class="post-url" href="/2018/07/14/Helloworld/" title="Helloworld">http://tenecnt.github.io/2018/07/14/Helloworld/</a></p>
+        <p>最后更新： 2018年07月16日 02:28</p>
+        <p>原始链接： <a class="post-url" href="/2018/07/16/hzzdj/" title="后缀自动机">http://tenecnt.github.io/2018/07/16/hzzdj/</a></p>
         <footer>
             <a href="http://tenecnt.github.io">
                 <img src="/images/logo.png" alt="tenecnt">
@@ -179,7 +175,7 @@ ga('send', 'pageview');
     <div class="post-share-list" id="share-list">
         <ul class="share-icons">
           <li>
-            <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://tenecnt.github.io/2018/07/14/Helloworld/&title=《Helloworld》 — tenecnt's blog&pic=http://tenecnt.github.ioimages/logo.png" data-title="微博">
+            <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://tenecnt.github.io/2018/07/16/hzzdj/&title=《后缀自动机》 — tenecnt's blog&pic=http://tenecnt.github.ioimages/logo.png" data-title="微博">
               <i class="fa fa-weibo"></i>
             </a>
           </li>
@@ -189,22 +185,22 @@ ga('send', 'pageview');
             </a>
           </li>
           <li>
-            <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://tenecnt.github.io/2018/07/14/Helloworld/&title=《Helloworld》 — tenecnt's blog&source=" data-title="QQ">
+            <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://tenecnt.github.io/2018/07/16/hzzdj/&title=《后缀自动机》 — tenecnt's blog&source=" data-title="QQ">
               <i class="fa fa-qq"></i>
             </a>
           </li>
           <li>
-            <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://tenecnt.github.io/2018/07/14/Helloworld/" data-title="Facebook">
+            <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://tenecnt.github.io/2018/07/16/hzzdj/" data-title="Facebook">
               <i class="fa fa-facebook"></i>
             </a>
           </li>
           <li>
-            <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Helloworld》 — tenecnt's blog&url=http://tenecnt.github.io/2018/07/14/Helloworld/&via=http://tenecnt.github.io" data-title="Twitter">
+            <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《后缀自动机》 — tenecnt's blog&url=http://tenecnt.github.io/2018/07/16/hzzdj/&via=http://tenecnt.github.io" data-title="Twitter">
               <i class="fa fa-twitter"></i>
             </a>
           </li>
           <li>
-            <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://tenecnt.github.io/2018/07/14/Helloworld/" data-title="Google+">
+            <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://tenecnt.github.io/2018/07/16/hzzdj/" data-title="Google+">
               <i class="fa fa-google-plus"></i>
             </a>
           </li>
@@ -214,7 +210,7 @@ ga('send', 'pageview');
 <div class="post-modal wx-share" id="wxShare">
     <a class="close" href="javascript:;" id="wxShare-close">×</a>
     <p>扫一扫，分享到微信</p>
-    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://tenecnt.github.io/2018/07/14/Helloworld/" alt="微信分享二维码">
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://tenecnt.github.io/2018/07/16/hzzdj/" alt="微信分享二维码">
 </div>
 
 <div class="mask"></div>
@@ -226,9 +222,7 @@ ga('send', 'pageview');
   <li class="article-footer-tags">
     <i class="fa fa-tags"></i>
       
-    <a href="/tags/试验/" class="color3">试验</a>
-      
-    <a href="/tags/math/" class="color5">math</a>
+    <a href="/tags/字符串/" class="color4">字符串</a>
       
   </li>
 
@@ -241,23 +235,18 @@ ga('send', 'pageview');
 
     <aside class="post-toc-pos post-toc-top" id="post-toc">
         <nav class="post-toc-wrap">
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#第二次转移博客"><span class="post-toc-text">第二次转移博客</span></a></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#转移重要代码"><span class="post-toc-text">转移重要代码</span></a></li></ol>
         </nav>
     </aside>
     
 
 <nav id="article-nav">
   
-    <a href="/2018/07/16/xushu/" id="article-nav-newer" class="article-nav-link-wrap">
-
-      <span class="article-nav-title">
-        <i class="fa fa-hand-o-left" aria-hidden="true"></i>
-        
-          虚树
-        
-      </span>
-    </a>
   
+    <a href="/2018/07/16/xushu/" id="article-nav-older" class="article-nav-link-wrap">
+      <span class="article-nav-title">虚树</span>
+      <i class="fa fa-hand-o-right" aria-hidden="true"></i>
+    </a>
   
 </nav>
 
@@ -399,23 +388,6 @@ ga('send', 'pageview');
      $(".article-entry p img").popImg();
   </script>
 
-  </div><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
-</script>
-
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Queue(function() {
-    var all = MathJax.Hub.getAllJax(), i;
-    for(i=0; i < all.length; i += 1) {
-      all[i].SourceElement().parentNode.className += ' has-jax';
-    }
-  });
-</script>
-
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
-</script>
-<!-- End: Injected MathJax -->
-<!-- hexo-inject:end -->
+  </div><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </body>
 </html>
