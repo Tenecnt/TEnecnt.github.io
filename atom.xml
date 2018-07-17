@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://tenecnt.github.io/"/>
-  <updated>2018-07-16T05:12:38.684Z</updated>
+  <updated>2018-07-17T06:01:28.745Z</updated>
   <id>http://tenecnt.github.io/</id>
   
   <author>
@@ -21,16 +21,26 @@
     <link href="http://tenecnt.github.io/2018/07/16/todolist/"/>
     <id>http://tenecnt.github.io/2018/07/16/todolist/</id>
     <published>2018-07-16T05:09:41.000Z</published>
-    <updated>2018-07-16T05:12:38.684Z</updated>
+    <updated>2018-07-17T06:01:28.745Z</updated>
     
-    <content type="html"><![CDATA[<hr><h2 id="弦图最大团"><a href="#弦图最大团" class="headerlink" title="[ ]| |弦图最大团"></a>[ ]| |弦图最大团</h2><h2 id="分治线段树"><a href="#分治线段树" class="headerlink" title="[ ]| |分治线段树"></a>[ ]| |分治线段树</h2><p>[.]| |dsu on tree</p>]]></content>
+    <content type="html"><![CDATA[<div class="table-container"><table><thead><tr><th>完成</th><th style="text-align:center">内容</th></tr></thead><tbody><tr><td></td><td style="text-align:center">分治线段树</td></tr><tr><td></td><td style="text-align:center">agc补题</td></tr><tr><td>done</td><td style="text-align:center">弦图最大团</td></tr><tr><td>done</td><td style="text-align:center">dsu on tree</td></tr></tbody></table></div>]]></content>
     
     <summary type="html">
     
       
       
-        &lt;hr&gt;
-&lt;h2 id=&quot;弦图最大团&quot;&gt;&lt;a href=&quot;#弦图最大团&quot; class=&quot;headerlink&quot; title=&quot;[ ]| |弦图最大团&quot;&gt;&lt;/a&gt;[ ]| |弦图最大团&lt;/h2&gt;&lt;h2 id=&quot;分治线段树&quot;&gt;&lt;a href=&quot;#分治线段树&quot; class=&quot;heade
+        &lt;div class=&quot;table-container&quot;&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;完成&lt;/th&gt;
+&lt;th style=&quot;text-align:center&quot;&gt;内容&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;
       
     
     </summary>
