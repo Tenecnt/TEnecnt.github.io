@@ -8,18 +8,18 @@
   
     <meta name="keywords" content="2333" />
   
-  <meta name="description" content="好吧这道题其实是道CRT裸题…… 首先哪条龙选哪把剑是固定的。拿个set(multiset)/map扫一遍即可。当然也可以自己写平衡树啊2333 然后就是若干 $ k_{i}x \equiv a_i (mod\;p_i) $ 可以讲整个柿子中的k_i,a_i,p_i同除gcd(k_i,p_i)(如果a_i无法整除就无解了)，这肯定对答案是无影响的。然后，江柿子两边同除k_i(已经有逆元了)，变为n">
+  <meta name="description" content="好吧这道题其实是道CRT裸题…… 首先哪条龙选哪把剑是固定的。拿个set(multiset)/map扫一遍即可。当然也可以自己写平衡树啊2333 然后就是若干 k_{i}x \equiv a_i (mod\;p_i) 可以讲整个柿子中的k_i,a_i,p_i同除gcd(k_i,p_i)(如果a_i无法整除就无解了)，这肯定对答案是无影响的。然后，江柿子两边同除k_i(已经有逆元了)，变为n个形为x">
 <meta name="keywords" content="数论,CRT">
 <meta property="og:type" content="article">
 <meta property="og:title" content="NOI2018屠龙勇士(dragon)">
 <meta property="og:url" content="http://tenecnt.github.io/2018/07/22/noi18d/index.html">
 <meta property="og:site_name" content="tenecnt&#39;s blog">
-<meta property="og:description" content="好吧这道题其实是道CRT裸题…… 首先哪条龙选哪把剑是固定的。拿个set(multiset)/map扫一遍即可。当然也可以自己写平衡树啊2333 然后就是若干 $ k_{i}x \equiv a_i (mod\;p_i) $ 可以讲整个柿子中的k_i,a_i,p_i同除gcd(k_i,p_i)(如果a_i无法整除就无解了)，这肯定对答案是无影响的。然后，江柿子两边同除k_i(已经有逆元了)，变为n">
+<meta property="og:description" content="好吧这道题其实是道CRT裸题…… 首先哪条龙选哪把剑是固定的。拿个set(multiset)/map扫一遍即可。当然也可以自己写平衡树啊2333 然后就是若干 k_{i}x \equiv a_i (mod\;p_i) 可以讲整个柿子中的k_i,a_i,p_i同除gcd(k_i,p_i)(如果a_i无法整除就无解了)，这肯定对答案是无影响的。然后，江柿子两边同除k_i(已经有逆元了)，变为n个形为x">
 <meta property="og:locale" content="中文">
-<meta property="og:updated_time" content="2018-07-22T13:45:24.193Z">
+<meta property="og:updated_time" content="2018-07-22T13:52:41.605Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="NOI2018屠龙勇士(dragon)">
-<meta name="twitter:description" content="好吧这道题其实是道CRT裸题…… 首先哪条龙选哪把剑是固定的。拿个set(multiset)/map扫一遍即可。当然也可以自己写平衡树啊2333 然后就是若干 $ k_{i}x \equiv a_i (mod\;p_i) $ 可以讲整个柿子中的k_i,a_i,p_i同除gcd(k_i,p_i)(如果a_i无法整除就无解了)，这肯定对答案是无影响的。然后，江柿子两边同除k_i(已经有逆元了)，变为n">
+<meta name="twitter:description" content="好吧这道题其实是道CRT裸题…… 首先哪条龙选哪把剑是固定的。拿个set(multiset)/map扫一遍即可。当然也可以自己写平衡树啊2333 然后就是若干 k_{i}x \equiv a_i (mod\;p_i) 可以讲整个柿子中的k_i,a_i,p_i同除gcd(k_i,p_i)(如果a_i无法整除就无解了)，这肯定对答案是无影响的。然后，江柿子两边同除k_i(已经有逆元了)，变为n个形为x">
   
   
     <link rel="icon" href="/favicon.ico">
@@ -149,7 +149,7 @@ ga('send', 'pageview');
             
             <p>好吧<a href="https://judge-duck.online:10086/problem/noi18d" target="_blank" rel="noopener">这道题</a>其实是道CRT裸题……</p>
 <p>首先哪条龙选哪把剑是固定的。拿个set(multiset)/map扫一遍即可。<del>当然也可以自己写平衡树啊2333</del></p>
-<p>然后就是若干 $ k_{i}x \equiv a_i (mod\;p_i) $</p>
+<p>然后就是若干 <script type="math/tex">k_{i}x \equiv a_i (mod\;p_i)</script></p>
 <p>可以讲整个柿子中的<script type="math/tex">k_i,a_i,p_i</script>同除<script type="math/tex">gcd(k_i,p_i)</script>(如果<script type="math/tex">a_i</script>无法整除就无解了)，这肯定对答案是无影响的。<br>然后，江柿子两边同除<script type="math/tex">k_i</script>(已经有逆元了)，变为<script type="math/tex">n</script>个形为<script type="math/tex">x \equiv a_i/k_i(mod\;p_i)</script>的柿子<br>这就成了裸的CRT了。<br>对于一个CRT，</p>
 <script type="math/tex; mode=display">\begin{equation}
 \begin{cases}
@@ -162,7 +162,7 @@ gcd(p_1,p_2) = d
 
             <div class="post-copyright">
     <div class="content">
-        <p>最后更新： 2018年07月22日 21:45</p>
+        <p>最后更新： 2018年07月22日 21:52</p>
         <p>原始链接： <a class="post-url" href="/2018/07/22/noi18d/" title="NOI2018屠龙勇士(dragon)">http://tenecnt.github.io/2018/07/22/noi18d/</a></p>
         <footer>
             <a href="http://tenecnt.github.io">
@@ -397,23 +397,6 @@ gcd(p_1,p_2) = d
      $(".article-entry p img").popImg();
   </script>
 
-  </div><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Config("");
-</script>
-
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Queue(function() {
-    var all = MathJax.Hub.getAllJax(), i;
-    for(i=0; i < all.length; i += 1) {
-      all[i].SourceElement().parentNode.className += ' has-jax';
-    }
-  });
-</script>
-
-<script type="text/javascript" src="custom_mathjax_source">
-</script>
-<!-- End: Injected MathJax -->
-<!-- hexo-inject:end -->
+  </div><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </body>
 </html>
