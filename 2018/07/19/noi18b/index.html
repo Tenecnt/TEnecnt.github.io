@@ -8,18 +8,18 @@
   
     <meta name="keywords" content="2333" />
   
-  <meta name="description" content="这道题的冒泡排序好像是假的 首先，根据那个啥的定义，首先必须得到坏序列的充要条件是 \exists{i a_{k} 证明就感性理解一下，对于中间那个数，无论它目标位置是在左边还是右边，都有至少一步向反方向移动，所以一定是坏序列了 80 然后80分就很简单了，设计这么一个函数，$F_{i,j}$表示目前有i个数需要排列，但是由于前面的数的限制，最小的$j$个数的相对顺序必须递增。 容易得到递推式：">
+  <meta name="description" content="这道题的冒泡排序好像是假的 首先，根据那个啥的定义，首先必须得到坏序列的充要条件是  \exists\;{i a_{k}证明就感性理解一下，对于中间那个数，无论它目标位置是在左边还是右边，都有至少一步向反方向移动，所以一定是坏序列了 80 然后80分就很简单了，设计这么一个函数，F_{i,j}表示目前有i个数需要排列，但是由于前面的数的限制，最小的$j$个数的相对顺序必须递增。 容易得到递推式：">
 <meta name="keywords" content="NOI,组合数学">
 <meta property="og:type" content="article">
 <meta property="og:title" content="NOI2018冒泡排序(inverse)">
 <meta property="og:url" content="http://tenecnt.github.io/2018/07/19/noi18b/index.html">
 <meta property="og:site_name" content="tenecnt&#39;s blog">
-<meta property="og:description" content="这道题的冒泡排序好像是假的 首先，根据那个啥的定义，首先必须得到坏序列的充要条件是 \exists{i a_{k} 证明就感性理解一下，对于中间那个数，无论它目标位置是在左边还是右边，都有至少一步向反方向移动，所以一定是坏序列了 80 然后80分就很简单了，设计这么一个函数，$F_{i,j}$表示目前有i个数需要排列，但是由于前面的数的限制，最小的$j$个数的相对顺序必须递增。 容易得到递推式：">
+<meta property="og:description" content="这道题的冒泡排序好像是假的 首先，根据那个啥的定义，首先必须得到坏序列的充要条件是  \exists\;{i a_{k}证明就感性理解一下，对于中间那个数，无论它目标位置是在左边还是右边，都有至少一步向反方向移动，所以一定是坏序列了 80 然后80分就很简单了，设计这么一个函数，F_{i,j}表示目前有i个数需要排列，但是由于前面的数的限制，最小的$j$个数的相对顺序必须递增。 容易得到递推式：">
 <meta property="og:locale" content="中文">
-<meta property="og:updated_time" content="2018-07-22T12:18:23.725Z">
+<meta property="og:updated_time" content="2018-07-22T13:49:56.761Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="NOI2018冒泡排序(inverse)">
-<meta name="twitter:description" content="这道题的冒泡排序好像是假的 首先，根据那个啥的定义，首先必须得到坏序列的充要条件是 \exists{i a_{k} 证明就感性理解一下，对于中间那个数，无论它目标位置是在左边还是右边，都有至少一步向反方向移动，所以一定是坏序列了 80 然后80分就很简单了，设计这么一个函数，$F_{i,j}$表示目前有i个数需要排列，但是由于前面的数的限制，最小的$j$个数的相对顺序必须递增。 容易得到递推式：">
+<meta name="twitter:description" content="这道题的冒泡排序好像是假的 首先，根据那个啥的定义，首先必须得到坏序列的充要条件是  \exists\;{i a_{k}证明就感性理解一下，对于中间那个数，无论它目标位置是在左边还是右边，都有至少一步向反方向移动，所以一定是坏序列了 80 然后80分就很简单了，设计这么一个函数，F_{i,j}表示目前有i个数需要排列，但是由于前面的数的限制，最小的$j$个数的相对顺序必须递增。 容易得到递推式：">
   
   
     <link rel="icon" href="/favicon.ico">
@@ -148,13 +148,13 @@ ga('send', 'pageview');
       
             
             <p><a href="https://judge-duck.online:10086/problem/noi18b" target="_blank" rel="noopener">这道题</a>的冒泡排序好像是假的</p>
-<p>首先，根据那个啥的定义，首先必须得到坏序列的充要条件是 <script type="math/tex">\exists{i<j<k},a_{i} > a_{j} > a_{k}</script></p>
-<p>证明就感性理解一下，对于中间那个数，无论它目标位置是在左边还是右边，都有至少一步向反方向移动，所以一定是坏序列了</p>
+<p>首先，根据那个啥的定义，首先必须得到坏序列的充要条件是 </p>
+<script type="math/tex; mode=display">\exists\;{i<j<k},a_{i} > a_{j} > a_{k}</script><p>证明就感性理解一下，对于中间那个数，无论它目标位置是在左边还是右边，都有至少一步向反方向移动，所以一定是坏序列了</p>
 <h3 id="80"><a href="#80" class="headerlink" title="80"></a>80</h3><hr>
-<p>然后80分就很简单了，设计这么一个函数，$F_{i,j}$表示目前有i个数需要排列，但是由于前面的数的限制，最小的$j$个数的相对顺序必须递增。</p>
-<p>容易得到递推式： <script type="math/tex">F_{i,j} = \sum^{j-1}_{i} F_{i-1,k}</script></p>
-<p>其实就是枚举拿的是哪个数，最小数就是$F_{i-1,k}$,否则对应了各个数。</p>
-<p>然后就拿这个东西像数位dp一样扫一遍过去就是O($n^2$)了</p>
+<p>然后80分就很简单了，设计这么一个函数，<script type="math/tex">F_{i,j}</script>表示目前有i个数需要排列，但是由于前面的数的限制，最小的$j$个数的相对顺序必须递增。</p>
+<p>容易得到递推式： </p>
+<script type="math/tex; mode=display">F_{i,j} = \sum^{j-1}_{k=i} F_{i-1,k}</script><p>其实就是枚举拿的是哪个数，最小数就是<script type="math/tex">F_{i-1,k}</script>,否则对应了各个数。</p>
+<p>然后就拿这个东西像数位dp一样扫一遍过去就是O(<script type="math/tex">n^2</script>)了</p>
 <h3 id="100"><a href="#100" class="headerlink" title="100"></a>100</h3><hr>
 <p>满分算法就比较神仙了</p>
 <p>曾经有这样一道<a href="https://www.codechef.com/APRIL18B/problems/VAIMIN" target="_blank" rel="noopener">题</a></p>
@@ -169,7 +169,7 @@ ga('send', 'pageview');
 
             <div class="post-copyright">
     <div class="content">
-        <p>最后更新： 2018年07月22日 20:18</p>
+        <p>最后更新： 2018年07月22日 21:49</p>
         <p>原始链接： <a class="post-url" href="/2018/07/19/noi18b/" title="NOI2018冒泡排序(inverse)">http://tenecnt.github.io/2018/07/19/noi18b/</a></p>
         <footer>
             <a href="http://tenecnt.github.io">
