@@ -3,23 +3,23 @@
 <head>
   <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
   
-  <title>my todolist和重要网站 | tenecnt&#39;s blog</title>
+  <title>bzoj5170(Fable) | tenecnt&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
     <meta name="keywords" content="2333" />
   
-  <meta name="description" content="完成 内容      分治线段树    agc补题    NOI18D1T3   \checkmark NOI18D1T2   \checkmark 弦图最大团   \checkmark dsu on tree     网站：谷歌代码规范">
-<meta name="keywords" content="规划">
+  <meta name="description" content="QwQ有点有趣 明显，平衡树可以秒这道题 但是总是感觉太烦了。 有没有好一点的方法呢？ 如果我们考虑每一个数，如果没有向后送，向前移的位置数等于前面比它大的数，显然这可以用树状数组搞。 而剩下的数相对顺序一定排好了 所以把剩下的数sort一下填进去就好了1234567891011121314151617181920212223242526272829303132333435363738394041">
+<meta name="keywords" content="树状数组">
 <meta property="og:type" content="article">
-<meta property="og:title" content="my todolist和重要网站">
-<meta property="og:url" content="http://tenecnt.github.io/2018/07/16/todolist/index.html">
+<meta property="og:title" content="bzoj5170(Fable)">
+<meta property="og:url" content="http://tenecnt.github.io/2018/07/24/bzoj5170/index.html">
 <meta property="og:site_name" content="tenecnt&#39;s blog">
-<meta property="og:description" content="完成 内容      分治线段树    agc补题    NOI18D1T3   \checkmark NOI18D1T2   \checkmark 弦图最大团   \checkmark dsu on tree     网站：谷歌代码规范">
+<meta property="og:description" content="QwQ有点有趣 明显，平衡树可以秒这道题 但是总是感觉太烦了。 有没有好一点的方法呢？ 如果我们考虑每一个数，如果没有向后送，向前移的位置数等于前面比它大的数，显然这可以用树状数组搞。 而剩下的数相对顺序一定排好了 所以把剩下的数sort一下填进去就好了1234567891011121314151617181920212223242526272829303132333435363738394041">
 <meta property="og:locale" content="中文">
-<meta property="og:updated_time" content="2018-07-20T12:27:31.789Z">
+<meta property="og:updated_time" content="2018-07-24T11:53:12.369Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="my todolist和重要网站">
-<meta name="twitter:description" content="完成 内容      分治线段树    agc补题    NOI18D1T3   \checkmark NOI18D1T2   \checkmark 弦图最大团   \checkmark dsu on tree     网站：谷歌代码规范">
+<meta name="twitter:title" content="bzoj5170(Fable)">
+<meta name="twitter:description" content="QwQ有点有趣 明显，平衡树可以秒这道题 但是总是感觉太烦了。 有没有好一点的方法呢？ 如果我们考虑每一个数，如果没有向后送，向前移的位置数等于前面比它大的数，显然这可以用树状数组搞。 而剩下的数相对顺序一定排好了 所以把剩下的数sort一下填进去就好了1234567891011121314151617181920212223242526272829303132333435363738394041">
   
   
     <link rel="icon" href="/favicon.ico">
@@ -116,20 +116,20 @@ ga('send', 'pageview');
     </div>
 </header>
       <div class="outer">
-        <section id="main" class="body-wrap"><article id="post-todolist" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main" class="body-wrap"><article id="post-bzoj5170" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="post-title" itemprop="name">
-      my todolist和重要网站
+      bzoj5170(Fable)
     </h1>
     <div class="post-title-bar">
       <ul>
           
         <li>
-          <i class="fa fa-calendar"></i>  2018-07-16
+          <i class="fa fa-calendar"></i>  2018-07-24
         </li>
         <li>
           <i class="fa fa-eye"></i>
@@ -145,48 +145,18 @@ ga('send', 'pageview');
     <div class="article-entry post-content" itemprop="articleBody">
       
             
-            <div class="table-container">
-<table>
-<thead>
-<tr>
-<th>完成</th>
-<th style="text-align:center">内容</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td></td>
-<td style="text-align:center">分治线段树</td>
-</tr>
-<tr>
-<td></td>
-<td style="text-align:center">agc补题</td>
-</tr>
-<tr>
-<td></td>
-<td style="text-align:center">NOI18D1T3</td>
-</tr>
-<tr>
-<td><script type="math/tex">\checkmark</script></td>
-<td style="text-align:center">NOI18D1T2</td>
-</tr>
-<tr>
-<td><script type="math/tex">\checkmark</script></td>
-<td style="text-align:center">弦图最大团</td>
-</tr>
-<tr>
-<td><script type="math/tex">\checkmark</script></td>
-<td style="text-align:center">dsu on tree</td>
-</tr>
-</tbody>
-</table>
-</div>
-<p>网站：<br><a href="http://zh-google-styleguide.readthedocs.io/en/latest/google-cpp-styleguide/" target="_blank" rel="noopener">谷歌代码规范</a></p>
+            <p><a href="https://www.lydsy.com/JudgeOnline/problem.php?id=5170" target="_blank" rel="noopener">QwQ</a>有点有趣</p>
+<p>明显，平衡树可以秒这道题</p>
+<p>但是总是感觉太烦了。</p>
+<p>有没有好一点的方法呢？</p>
+<p>如果我们考虑每一个数，如果没有向后送，向前移的位置数等于前面比它大的数，显然这可以用树状数组搞。</p>
+<p>而剩下的数相对顺序一定排好了</p>
+<p>所以把剩下的数sort一下填进去就好了<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MN 200005</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> lb(x) ((x)&amp;(-x))</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> ft first</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> sd second</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> pii pair<span class="meta-string">&lt;int,int&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> c[MN],res[MN],b[MN],n,k;</span><br><span class="line">pii a[MN];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> x,<span class="keyword">int</span> y)</span></span>&#123;</span><br><span class="line">	<span class="keyword">for</span>(;x&lt;=n;x+=lb(x))c[x]+=y;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">C</span><span class="params">(pii A,pii B)</span></span>&#123;</span><br><span class="line">	<span class="keyword">return</span> A.sd&lt;B.sd;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">qry</span><span class="params">(<span class="keyword">int</span> x)</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> res=<span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span>(;x;x-=lb(x))res+=c[x];</span><br><span class="line">	<span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">priority_queue&lt;<span class="keyword">int</span>&gt; pQ;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">"%d%d"</span>,&amp;n,&amp;k);</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;++i)&#123;</span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;a[i].ft);</span><br><span class="line">		a[i].sd=i;</span><br><span class="line">	&#125;</span><br><span class="line">	sort(a+<span class="number">1</span>,a+n+<span class="number">1</span>);</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=n;i;--i)&#123;</span><br><span class="line">		b[a[i].sd]=qry(a[i].sd);</span><br><span class="line">		add(a[i].sd,<span class="number">1</span>);</span><br><span class="line">		<span class="keyword">if</span>(b[a[i].sd]&gt;k)res[a[i].sd-k]=a[i].ft;</span><br><span class="line">		<span class="keyword">else</span> pQ.push(a[i].ft);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=n;i;--i)&#123;</span><br><span class="line">		<span class="keyword">if</span>(!res[i])res[i]=pQ.top(),pQ.pop();</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;++i)<span class="built_in">printf</span>(<span class="string">"%d\n"</span>,res[i]);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 
             <div class="post-copyright">
     <div class="content">
-        <p>最后更新： 2018年07月20日 20:27</p>
-        <p>原始链接： <a class="post-url" href="/2018/07/16/todolist/" title="my todolist和重要网站">http://tenecnt.github.io/2018/07/16/todolist/</a></p>
+        <p>最后更新： 2018年07月24日 19:53</p>
+        <p>原始链接： <a class="post-url" href="/2018/07/24/bzoj5170/" title="bzoj5170(Fable)">http://tenecnt.github.io/2018/07/24/bzoj5170/</a></p>
         <footer>
             <a href="http://tenecnt.github.io">
                 <img src="/images/logo.png" alt="tenecnt">
@@ -212,7 +182,7 @@ ga('send', 'pageview');
     <div class="post-share-list" id="share-list">
         <ul class="share-icons">
           <li>
-            <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://tenecnt.github.io/2018/07/16/todolist/&title=《my todolist和重要网站》 — tenecnt's blog&pic=http://tenecnt.github.ioimages/logo.png" data-title="微博">
+            <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://tenecnt.github.io/2018/07/24/bzoj5170/&title=《bzoj5170(Fable)》 — tenecnt's blog&pic=http://tenecnt.github.ioimages/logo.png" data-title="微博">
               <i class="fa fa-weibo"></i>
             </a>
           </li>
@@ -222,22 +192,22 @@ ga('send', 'pageview');
             </a>
           </li>
           <li>
-            <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://tenecnt.github.io/2018/07/16/todolist/&title=《my todolist和重要网站》 — tenecnt's blog&source=" data-title="QQ">
+            <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://tenecnt.github.io/2018/07/24/bzoj5170/&title=《bzoj5170(Fable)》 — tenecnt's blog&source=" data-title="QQ">
               <i class="fa fa-qq"></i>
             </a>
           </li>
           <li>
-            <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://tenecnt.github.io/2018/07/16/todolist/" data-title="Facebook">
+            <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://tenecnt.github.io/2018/07/24/bzoj5170/" data-title="Facebook">
               <i class="fa fa-facebook"></i>
             </a>
           </li>
           <li>
-            <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《my todolist和重要网站》 — tenecnt's blog&url=http://tenecnt.github.io/2018/07/16/todolist/&via=http://tenecnt.github.io" data-title="Twitter">
+            <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《bzoj5170(Fable)》 — tenecnt's blog&url=http://tenecnt.github.io/2018/07/24/bzoj5170/&via=http://tenecnt.github.io" data-title="Twitter">
               <i class="fa fa-twitter"></i>
             </a>
           </li>
           <li>
-            <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://tenecnt.github.io/2018/07/16/todolist/" data-title="Google+">
+            <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://tenecnt.github.io/2018/07/24/bzoj5170/" data-title="Google+">
               <i class="fa fa-google-plus"></i>
             </a>
           </li>
@@ -247,7 +217,7 @@ ga('send', 'pageview');
 <div class="post-modal wx-share" id="wxShare">
     <a class="close" href="javascript:;" id="wxShare-close">×</a>
     <p>扫一扫，分享到微信</p>
-    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://tenecnt.github.io/2018/07/16/todolist/" alt="微信分享二维码">
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://tenecnt.github.io/2018/07/24/bzoj5170/" alt="微信分享二维码">
 </div>
 
 <div class="mask"></div>
@@ -259,7 +229,7 @@ ga('send', 'pageview');
   <li class="article-footer-tags">
     <i class="fa fa-tags"></i>
       
-    <a href="/tags/规划/" class="color3">规划</a>
+    <a href="/tags/树状数组/" class="color5">树状数组</a>
       
   </li>
 
@@ -273,19 +243,19 @@ ga('send', 'pageview');
 
 <nav id="article-nav">
   
-    <a href="/2018/07/17/poly2/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2018/07/24/CCJulyTom/" id="article-nav-newer" class="article-nav-link-wrap">
 
       <span class="article-nav-title">
         <i class="fa fa-hand-o-left" aria-hidden="true"></i>
         
-          多项式（2）
+          (CC JulyLong)Tom and Jerry
         
       </span>
     </a>
   
   
-    <a href="/2018/07/16/poly/" id="article-nav-older" class="article-nav-link-wrap">
-      <span class="article-nav-title">多项式(1)</span>
+    <a href="/2018/07/22/noi18d/" id="article-nav-older" class="article-nav-link-wrap">
+      <span class="article-nav-title">NOI2018屠龙勇士(dragon)</span>
       <i class="fa fa-hand-o-right" aria-hidden="true"></i>
     </a>
   
