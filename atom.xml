@@ -168,9 +168,9 @@
     </summary>
     
     
-      <category term="NOI" scheme="http://tenecnt.github.io/tags/NOI/"/>
-    
       <category term="组合数学" scheme="http://tenecnt.github.io/tags/%E7%BB%84%E5%90%88%E6%95%B0%E5%AD%A6/"/>
+    
+      <category term="NOI" scheme="http://tenecnt.github.io/tags/NOI/"/>
     
   </entry>
   
@@ -194,9 +194,9 @@
     </summary>
     
     
-      <category term="NOI" scheme="http://tenecnt.github.io/tags/NOI/"/>
-    
       <category term="图论" scheme="http://tenecnt.github.io/tags/%E5%9B%BE%E8%AE%BA/"/>
+    
+      <category term="NOI" scheme="http://tenecnt.github.io/tags/NOI/"/>
     
       <category term="生成树" scheme="http://tenecnt.github.io/tags/%E7%94%9F%E6%88%90%E6%A0%91/"/>
     
