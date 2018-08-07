@@ -1,3 +1,18 @@
+<script>
+  fetch('https://v1.hitokoto.cn')
+    .then(function (res){
+      return res.json();
+    })
+    .then(function (data) {
+      var hitokoto = document.getElementById('hitokoto');
+      hitokoto.innerText = "『 " + data.hitokoto + " 』";
+      var from = document.getElementById('hitokoto-from');
+      from.innerText = "——" + data.from + "\b\b\b\b\b\b\b\b\b";
+    })
+    .catch(function (err) {
+      console.error(err);
+    })
+</script>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,6 +22,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
     <meta name="keywords" content="2333" />
+  
   
   <meta property="og:type" content="website">
 <meta property="og:title" content="tenecnt&#39;s blog">
@@ -111,9 +127,29 @@ ga('send', 'pageview');
     </div>
 </header>
       <div class="outer">
-        <section id="main" class="body-wrap">
+
+        <section id="main" class="body-wrap"><article class="article" itemscope itemprop="blogPost">
+  <div class="article-inner">
+      <header class="article-header">
+        
+    <h1 itemprop="name">
+      <a class="article-title"  >一言（ヒトコト）</a>
+    </h1>
+
+
+      </header>
+    <div class="article-entry" itemprop="articleBody">
+<div style="text-align:center; font-size:20px" id="hitokoto"></div>
+<br>
+<div style="text-align:right" id="hitokoto-from"></div>
+    </div>
+  </div>
+</article>
+
+
   
-    <article id="post-hzzdj" class="article article-type-post" itemscope itemprop="blogPost">
+    
+<article id="post-hzzdj" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
@@ -123,6 +159,7 @@ ga('send', 'pageview');
       <a class="article-title" href="/2018/07/16/hzzdj/"  >后缀自动机</a>
     </h1>
   
+
 
           
       </header>
@@ -170,7 +207,8 @@ ga('send', 'pageview');
 
 
   
-    <article id="post-xushu" class="article article-type-post" itemscope itemprop="blogPost">
+    
+<article id="post-xushu" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
@@ -180,6 +218,7 @@ ga('send', 'pageview');
       <a class="article-title" href="/2018/07/16/xushu/"  >虚树</a>
     </h1>
   
+
 
           
       </header>
@@ -227,7 +266,8 @@ ga('send', 'pageview');
 
 
   
-    <article id="post-Helloworld" class="article article-type-post" itemscope itemprop="blogPost">
+    
+<article id="post-Helloworld" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
@@ -237,6 +277,7 @@ ga('send', 'pageview');
       <a class="article-title" href="/2018/07/14/Helloworld/"  >Helloworld</a>
     </h1>
   
+
 
           
       </header>
@@ -293,6 +334,7 @@ ga('send', 'pageview');
   <nav id="page-nav">
     <a class="extend prev" rel="prev" href="/"><< Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
   </nav>
+
 </section>
         
       </div>
@@ -401,6 +443,7 @@ ga('send', 'pageview');
         </a>
     </li>
 </div>
+
 <script src="/js/search.js"></script>
 <script src="/js/main.js"></script>
 

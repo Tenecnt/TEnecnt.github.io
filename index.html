@@ -1,3 +1,18 @@
+<script>
+  fetch('https://v1.hitokoto.cn')
+    .then(function (res){
+      return res.json();
+    })
+    .then(function (data) {
+      var hitokoto = document.getElementById('hitokoto');
+      hitokoto.innerText = "『 " + data.hitokoto + " 』";
+      var from = document.getElementById('hitokoto-from');
+      from.innerText = "——" + data.from + "\b\b\b\b\b\b\b\b\b";
+    })
+    .catch(function (err) {
+      console.error(err);
+    })
+</script>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,6 +22,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
     <meta name="keywords" content="2333" />
+  
   
   <meta property="og:type" content="website">
 <meta property="og:title" content="tenecnt&#39;s blog">
@@ -111,9 +127,29 @@ ga('send', 'pageview');
     </div>
 </header>
       <div class="outer">
-        <section id="main" class="body-wrap">
+
+        <section id="main" class="body-wrap"><article class="article" itemscope itemprop="blogPost">
+  <div class="article-inner">
+      <header class="article-header">
+        
+    <h1 itemprop="name">
+      <a class="article-title"  >一言（ヒトコト）</a>
+    </h1>
+
+
+      </header>
+    <div class="article-entry" itemprop="articleBody">
+<div style="text-align:center; font-size:20px" id="hitokoto"></div>
+<br>
+<div style="text-align:right" id="hitokoto-from"></div>
+    </div>
+  </div>
+</article>
+
+
   
-    <article id="post-todolist" class="article article-type-post" itemscope itemprop="blogPost">
+    
+<article id="post-todolist" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
@@ -123,6 +159,7 @@ ga('send', 'pageview');
       <a class="article-title" href="/2018/07/16/todolist/"  >My Todolist和重要网站</a>
     </h1>
   
+
 
           
       </header>
@@ -200,7 +237,8 @@ NOI18D1T2
 
 
   
-    <article id="post-min25s" class="article article-type-post" itemscope itemprop="blogPost">
+    
+<article id="post-min25s" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
@@ -210,6 +248,7 @@ NOI18D1T2
       <a class="article-title" href="/2018/07/27/min25s/"  >Min_25筛</a>
     </h1>
   
+
 
           
       </header>
@@ -261,7 +300,8 @@ Min_25筛这个东西，感觉对于不同题，思路上还是有些不同的�
 
 
   
-    <article id="post-Stirling" class="article article-type-post" itemscope itemprop="blogPost">
+    
+<article id="post-Stirling" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
@@ -271,6 +311,7 @@ Min_25筛这个东西，感觉对于不同题，思路上还是有些不同的�
       <a class="article-title" href="/2018/07/24/Stirling/"  >Stirling学习</a>
     </h1>
   
+
 
           
       </header>
@@ -320,7 +361,8 @@ Min_25筛这个东西，感觉对于不同题，思路上还是有些不同的�
 
 
   
-    <article id="post-CCJulyTom" class="article article-type-post" itemscope itemprop="blogPost">
+    
+<article id="post-CCJulyTom" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
@@ -330,6 +372,7 @@ Min_25筛这个东西，感觉对于不同题，思路上还是有些不同的�
       <a class="article-title" href="/2018/07/24/CCJulyTom/"  >(CC JulyLong)Tom and Jerry</a>
     </h1>
   
+
 
           
       </header>
@@ -383,7 +426,8 @@ Min_25筛这个东西，感觉对于不同题，思路上还是有些不同的�
 
 
   
-    <article id="post-bzoj5170" class="article article-type-post" itemscope itemprop="blogPost">
+    
+<article id="post-bzoj5170" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
@@ -393,6 +437,7 @@ Min_25筛这个东西，感觉对于不同题，思路上还是有些不同的�
       <a class="article-title" href="/2018/07/24/bzoj5170/"  >bzoj5170(Fable)</a>
     </h1>
   
+
 
           
       </header>
@@ -444,7 +489,8 @@ Min_25筛这个东西，感觉对于不同题，思路上还是有些不同的�
 
 
   
-    <article id="post-noi18d" class="article article-type-post" itemscope itemprop="blogPost">
+    
+<article id="post-noi18d" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
@@ -454,6 +500,7 @@ Min_25筛这个东西，感觉对于不同题，思路上还是有些不同的�
       <a class="article-title" href="/2018/07/22/noi18d/"  >NOI2018屠龙勇士(dragon)</a>
     </h1>
   
+
 
           
       </header>
@@ -505,7 +552,8 @@ Min_25筛这个东西，感觉对于不同题，思路上还是有些不同的�
 
 
   
-    <article id="post-noi18b" class="article article-type-post" itemscope itemprop="blogPost">
+    
+<article id="post-noi18b" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
@@ -515,6 +563,7 @@ Min_25筛这个东西，感觉对于不同题，思路上还是有些不同的�
       <a class="article-title" href="/2018/07/19/noi18b/"  >NOI2018冒泡排序(inverse)</a>
     </h1>
   
+
 
           
       </header>
@@ -566,7 +615,8 @@ Min_25筛这个东西，感觉对于不同题，思路上还是有些不同的�
 
 
   
-    <article id="post-noi18a" class="article article-type-post" itemscope itemprop="blogPost">
+    
+<article id="post-noi18a" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
@@ -576,6 +626,7 @@ Min_25筛这个东西，感觉对于不同题，思路上还是有些不同的�
       <a class="article-title" href="/2018/07/19/noi18a/"  >NOI2018归程(return)</a>
     </h1>
   
+
 
           
       </header>
@@ -629,7 +680,8 @@ Min_25筛这个东西，感觉对于不同题，思路上还是有些不同的�
 
 
   
-    <article id="post-poly2" class="article article-type-post" itemscope itemprop="blogPost">
+    
+<article id="post-poly2" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
@@ -639,6 +691,7 @@ Min_25筛这个东西，感觉对于不同题，思路上还是有些不同的�
       <a class="article-title" href="/2018/07/17/poly2/"  >多项式(2)</a>
     </h1>
   
+
 
           
       </header>
@@ -689,7 +742,8 @@ Min_25筛这个东西，感觉对于不同题，思路上还是有些不同的�
 
 
   
-    <article id="post-poly" class="article article-type-post" itemscope itemprop="blogPost">
+    
+<article id="post-poly" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
@@ -699,6 +753,7 @@ Min_25筛这个东西，感觉对于不同题，思路上还是有些不同的�
       <a class="article-title" href="/2018/07/16/poly/"  >多项式(1)</a>
     </h1>
   
+
 
           
       </header>
@@ -755,6 +810,7 @@ Min_25筛这个东西，感觉对于不同题，思路上还是有些不同的�
   <nav id="page-nav">
     <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next >></a>
   </nav>
+
 </section>
         
       </div>
@@ -863,6 +919,7 @@ Min_25筛这个东西，感觉对于不同题，思路上还是有些不同的�
         </a>
     </li>
 </div>
+
 <script src="/js/search.js"></script>
 <script src="/js/main.js"></script>
 
