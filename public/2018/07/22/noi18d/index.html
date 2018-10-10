@@ -32,13 +32,13 @@
 <meta property="og:site_name" content="tenecnt&#39;s blog">
 <meta property="og:description" content="好吧这道题其实是道CRT裸题…… 首先哪条龙选哪把剑是固定的。拿个set(multiset)/map扫一遍即可。当然也可以自己写平衡树啊2333 然后就是若干 k_{i}x \equiv a_i (mod\;p_i) 可以讲整个柿子中的k_i,a_i,p_i同除gcd(k_i,p_i)(如果a_i无法整除就无解了)，这肯定对答案是无影响的。然后，江柿子两边同除k_i(已经有逆元了)，变为n个形为x">
 <meta property="og:locale" content="中文">
-<meta property="og:updated_time" content="2018-08-29T09:48:57.112Z">
+<meta property="og:updated_time" content="2018-09-12T05:30:32.874Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="NOI2018屠龙勇士(dragon)">
 <meta name="twitter:description" content="好吧这道题其实是道CRT裸题…… 首先哪条龙选哪把剑是固定的。拿个set(multiset)/map扫一遍即可。当然也可以自己写平衡树啊2333 然后就是若干 k_{i}x \equiv a_i (mod\;p_i) 可以讲整个柿子中的k_i,a_i,p_i同除gcd(k_i,p_i)(如果a_i无法整除就无解了)，这肯定对答案是无影响的。然后，江柿子两边同除k_i(已经有逆元了)，变为n个形为x">
   
   
-    <link rel="icon" href="/favicon.ico">
+    <link rel="icon" href="/Gus.ico">
   
   <link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
   <link rel="stylesheet" href="/css/style.css">
@@ -84,6 +84,11 @@ ga('send', 'pageview');
                     <a  href="/archives">
                         <i class="fa fa-archive"></i>
                         <span>Archives</span>
+                    </a>
+                    
+                    <a  href="/friends">
+                        <i class="fa fa-user"></i>
+                        <span>friends</span>
                     </a>
                     
                 </nav>
@@ -180,7 +185,7 @@ gcd(p_1,p_2) = d
 
             <div class="post-copyright">
     <div class="content">
-        <p>最后更新： 2018年08月29日 17:48</p>
+        <p>最后更新： 2018年09月12日 13:30</p>
         <p>原始链接： <a class="post-url" href="/2018/07/22/noi18d/" title="NOI2018屠龙勇士(dragon)">http://tenecnt.github.io/2018/07/22/noi18d/</a></p>
         <footer>
             <a href="http://tenecnt.github.io">
@@ -349,7 +354,7 @@ gcd(p_1,p_2) = d
             
         </div>
         <div id="sidebar-menu-box-tags">
-            <a href="/tags/CRT/" style="font-size: 10px;">CRT</a> <a href="/tags/NOI/" style="font-size: 15px;">NOI</a> <a href="/tags/math/" style="font-size: 10px;">math</a> <a href="/tags/乱搞/" style="font-size: 10px;">乱搞</a> <a href="/tags/交互题/" style="font-size: 10px;">交互题</a> <a href="/tags/图论/" style="font-size: 20px;">图论</a> <a href="/tags/多项式/" style="font-size: 15px;">多项式</a> <a href="/tags/字符串/" style="font-size: 10px;">字符串</a> <a href="/tags/数论/" style="font-size: 15px;">数论</a> <a href="/tags/数论筛/" style="font-size: 10px;">数论筛</a> <a href="/tags/最大团/" style="font-size: 10px;">最大团</a> <a href="/tags/树状数组/" style="font-size: 10px;">树状数组</a> <a href="/tags/生成树/" style="font-size: 10px;">生成树</a> <a href="/tags/组合数学/" style="font-size: 15px;">组合数学</a> <a href="/tags/规划/" style="font-size: 10px;">规划</a> <a href="/tags/试验/" style="font-size: 10px;">试验</a>
+            <a href="/tags/CRT/" style="font-size: 10px;">CRT</a> <a href="/tags/NOI/" style="font-size: 15px;">NOI</a> <a href="/tags/fwt/" style="font-size: 10px;">fwt</a> <a href="/tags/lct/" style="font-size: 10px;">lct</a> <a href="/tags/math/" style="font-size: 10px;">math</a> <a href="/tags/乱搞/" style="font-size: 10px;">乱搞</a> <a href="/tags/交互题/" style="font-size: 10px;">交互题</a> <a href="/tags/图论/" style="font-size: 20px;">图论</a> <a href="/tags/多项式/" style="font-size: 15px;">多项式</a> <a href="/tags/字符串/" style="font-size: 10px;">字符串</a> <a href="/tags/数列/" style="font-size: 10px;">数列</a> <a href="/tags/数据结构/" style="font-size: 10px;">数据结构</a> <a href="/tags/数论/" style="font-size: 15px;">数论</a> <a href="/tags/数论筛/" style="font-size: 10px;">数论筛</a> <a href="/tags/最大团/" style="font-size: 10px;">最大团</a> <a href="/tags/树状数组/" style="font-size: 10px;">树状数组</a> <a href="/tags/生成树/" style="font-size: 10px;">生成树</a> <a href="/tags/组合数学/" style="font-size: 15px;">组合数学</a> <a href="/tags/规划/" style="font-size: 10px;">规划</a> <a href="/tags/试验/" style="font-size: 10px;">试验</a> <a href="/tags/递推式/" style="font-size: 10px;">递推式</a>
         </div>
     </div>
     <a href="javascript:;" class="sidebar-menu-box-close">&times;</a>
@@ -371,12 +376,18 @@ gcd(p_1,p_2) = d
                 </a>
             </li>
             
+            <li>
+                <a  href="/friends">
+                    <i class="fa fa-user"></i><span>friends</span>
+                </a>
+            </li>
+            
         </ul>
     </div>
     <div class="mobile-header-tag-container">
         <span class="title">Tags</span>
         <div id="mobile-header-container-tags">
-            <a href="/tags/CRT/" style="font-size: 10px;">CRT</a> <a href="/tags/NOI/" style="font-size: 15px;">NOI</a> <a href="/tags/math/" style="font-size: 10px;">math</a> <a href="/tags/乱搞/" style="font-size: 10px;">乱搞</a> <a href="/tags/交互题/" style="font-size: 10px;">交互题</a> <a href="/tags/图论/" style="font-size: 20px;">图论</a> <a href="/tags/多项式/" style="font-size: 15px;">多项式</a> <a href="/tags/字符串/" style="font-size: 10px;">字符串</a> <a href="/tags/数论/" style="font-size: 15px;">数论</a> <a href="/tags/数论筛/" style="font-size: 10px;">数论筛</a> <a href="/tags/最大团/" style="font-size: 10px;">最大团</a> <a href="/tags/树状数组/" style="font-size: 10px;">树状数组</a> <a href="/tags/生成树/" style="font-size: 10px;">生成树</a> <a href="/tags/组合数学/" style="font-size: 15px;">组合数学</a> <a href="/tags/规划/" style="font-size: 10px;">规划</a> <a href="/tags/试验/" style="font-size: 10px;">试验</a>
+            <a href="/tags/CRT/" style="font-size: 10px;">CRT</a> <a href="/tags/NOI/" style="font-size: 15px;">NOI</a> <a href="/tags/fwt/" style="font-size: 10px;">fwt</a> <a href="/tags/lct/" style="font-size: 10px;">lct</a> <a href="/tags/math/" style="font-size: 10px;">math</a> <a href="/tags/乱搞/" style="font-size: 10px;">乱搞</a> <a href="/tags/交互题/" style="font-size: 10px;">交互题</a> <a href="/tags/图论/" style="font-size: 20px;">图论</a> <a href="/tags/多项式/" style="font-size: 15px;">多项式</a> <a href="/tags/字符串/" style="font-size: 10px;">字符串</a> <a href="/tags/数列/" style="font-size: 10px;">数列</a> <a href="/tags/数据结构/" style="font-size: 10px;">数据结构</a> <a href="/tags/数论/" style="font-size: 15px;">数论</a> <a href="/tags/数论筛/" style="font-size: 10px;">数论筛</a> <a href="/tags/最大团/" style="font-size: 10px;">最大团</a> <a href="/tags/树状数组/" style="font-size: 10px;">树状数组</a> <a href="/tags/生成树/" style="font-size: 10px;">生成树</a> <a href="/tags/组合数学/" style="font-size: 15px;">组合数学</a> <a href="/tags/规划/" style="font-size: 10px;">规划</a> <a href="/tags/试验/" style="font-size: 10px;">试验</a> <a href="/tags/递推式/" style="font-size: 10px;">递推式</a>
         </div>
     </div>
 </div>

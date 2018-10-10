@@ -1,0 +1,467 @@
+<script>
+  fetch('https://v1.hitokoto.cn')
+    .then(function (res){
+      return res.json();
+    })
+    .then(function (data) {
+      var hitokoto = document.getElementById('hitokoto');
+      hitokoto.innerText = "『 " + data.hitokoto + " 』";
+      var from = document.getElementById('hitokoto-from');
+      from.innerText = "——" + data.from + "\b\b\b\b\b\b\b\b\b";
+    })
+    .catch(function (err) {
+      console.error(err);
+    })
+</script>
+<!DOCTYPE html>
+<html>
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+  
+  <title>Lct学习 | tenecnt&#39;s blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+    <meta name="keywords" content="2333" />
+  
+  
+  <meta name="description" content="终于还是学习了一下lct(然而我还是不会证复杂度) 讲道理，这东西比想象的要来的简单 概述首先，这个东西是用来维护树的信息的 可以支持link和cut操作(所以叫做link-cut-tree) 这个link和cut，顾名思义，就是把图断开和接上 如何做到呢？ 同是用数据结构维护一树，我们会想到树剖 树剖分重链轻链，这里也可以这样 但略有偏差，这里重链不一定要最大，而且一个点向下可以没有重链 但重链">
+<meta name="keywords" content="图论,数据结构,lct">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Lct学习">
+<meta property="og:url" content="http://tenecnt.github.io/2018/09/01/lct/index.html">
+<meta property="og:site_name" content="tenecnt&#39;s blog">
+<meta property="og:description" content="终于还是学习了一下lct(然而我还是不会证复杂度) 讲道理，这东西比想象的要来的简单 概述首先，这个东西是用来维护树的信息的 可以支持link和cut操作(所以叫做link-cut-tree) 这个link和cut，顾名思义，就是把图断开和接上 如何做到呢？ 同是用数据结构维护一树，我们会想到树剖 树剖分重链轻链，这里也可以这样 但略有偏差，这里重链不一定要最大，而且一个点向下可以没有重链 但重链">
+<meta property="og:locale" content="中文">
+<meta property="og:updated_time" content="2018-09-12T05:30:32.874Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Lct学习">
+<meta name="twitter:description" content="终于还是学习了一下lct(然而我还是不会证复杂度) 讲道理，这东西比想象的要来的简单 概述首先，这个东西是用来维护树的信息的 可以支持link和cut操作(所以叫做link-cut-tree) 这个link和cut，顾名思义，就是把图断开和接上 如何做到呢？ 同是用数据结构维护一树，我们会想到树剖 树剖分重链轻链，这里也可以这样 但略有偏差，这里重链不一定要最大，而且一个点向下可以没有重链 但重链">
+  
+  
+    <link rel="icon" href="/Gus.ico">
+  
+  <link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css">
+  <script src="/js/pace.min.js"></script>
+  <script src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-122354200-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics --><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+  
+  
+
+</head>
+
+<body>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="container">
+      <header id="header">
+    <div id="banner"></div>
+    <div id="header-outer">
+        <div id="header-menu" class="header-menu-pos animated">
+            <div class="header-menu-container">
+                <a href="/" class="left">
+                    <span class="site-title">Tenecnt&#39;s Blog</span>
+                </a>
+                <nav id="header-menu-nav" class="right">
+                    
+                    <a  href="/">
+                        <i class="fa fa-home"></i>
+                        <span>Home</span>
+                    </a>
+                    
+                    <a  href="/archives">
+                        <i class="fa fa-archive"></i>
+                        <span>Archives</span>
+                    </a>
+                    
+                    <a  href="/friends">
+                        <i class="fa fa-user"></i>
+                        <span>friends</span>
+                    </a>
+                    
+                </nav>
+                <a class="mobile-header-menu-button">
+                    <i class="fa fa-bars"></i>
+                </a>
+            </div>
+        </div>
+        <div id="header-row">
+            <div id="logo">
+                <a href="/">
+                    <img src="/images/logo.png" alt="logo">
+                </a>
+            </div>
+            <div class="header-info">
+                <div id="header-title">
+                    
+                    <h2>
+                        Tenecnt&#39;s Blog
+                    </h2>
+                    
+                </div>
+                <div id="header-description">
+                    
+                    <h3>
+                        2333
+                    </h3>
+                    
+                </div>
+            </div>
+            <nav class="header-nav">
+                <div class="social">
+                    
+                        <a title="2333" target="_blank" href="//teencnt.github.com">
+                            <i class="fa fa-home fa-2x"></i></a>
+                    
+                        <a title="Github" target="_blank" href="//github.com/tenecnt">
+                            <i class="fa fa-github fa-2x"></i></a>
+                    
+                        <a title="Twitter" target="_blank" href="//twitter.com/tenecnt">
+                            <i class="fa fa-twitter fa-2x"></i></a>
+                    
+                </div>
+            </nav>
+        </div>
+    </div>
+</header>
+      <div class="outer">
+
+        <section id="main" class="body-wrap">
+<article id="post-lct" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="post-title" itemprop="name">
+      Lct学习
+    </h1>
+    <div class="post-title-bar">
+      <ul>
+          
+        <li>
+          <i class="fa fa-calendar"></i>  2018-09-01
+        </li>
+        <li>
+          <i class="fa fa-eye"></i>
+          <span id="busuanzi_value_page_pv"></span>
+          
+        </li>
+      </ul>
+    </div>
+  
+
+
+          
+      </header>
+    
+    <div class="article-entry post-content" itemprop="articleBody">
+      
+            
+            <p>终于还是学习了一下lct<del>(然而我还是不会证复杂度)</del></p>
+<p>讲道理，这东西比想象的要来的简单</p>
+<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>首先，这个东西是用来维护树的信息的</p>
+<p>可以支持link和cut操作(所以叫做link-cut-tree)</p>
+<p>这个link和cut，顾名思义，就是把图断开和接上</p>
+<p>如何做到呢？</p>
+<p>同是用数据结构维护一树，我们会想到树剖</p>
+<p>树剖分重链轻链，这里也可以这样</p>
+<p>但略有偏差，这里重链不一定要最大，而且一个点向下可以没有重链</p>
+<p>但重链与轻链随时会改变，那怎么办呢</p>
+<p>我们不用线段树维护，我们用splay</p>
+<p>支持分裂合并的平衡树都可以完成这件事</p>
+<p>但为什么选splay？因为出于某种玄学的复杂度证明用splay是一个log的……</p>
+<p>现在，我们用一棵splay表示一条重链，中序遍历表示它从上往下的顺序</p>
+<p>那么每次如何操作呢？</p>
+<p>我们需要制造出这么几个操作：</p>
+<h3 id="is-root"><a href="#is-root" class="headerlink" title="is_root"></a>is_root</h3><p>它的意思就是判断一个点是否是一棵splay的根</p>
+<p>注意这是splay的根，而不是树的根<del>我被坑了一次</del></p>
+<p>注意这个函数没有在其他splay出现过，这里只是为了不用写分裂合并</p>
+<p>方法很简单，用“父亲有没有孩子是自己”来标记是否为根</p>
+<p>这使lct中的splay短了很多</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">Isroot</span><span class="params">(<span class="keyword">int</span> x)</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> N[N[x].fa][<span class="number">0</span>]!=x&amp;&amp;N[N[x].fa][<span class="number">1</span>]!=x;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="access"><a href="#access" class="headerlink" title="access"></a>access</h3><p>它指打通一个点到根的链(打成重链)<br>就是不停spaly，然后把父亲的儿子变成自己，很好理解<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Access</span><span class="params">(<span class="keyword">int</span> x)</span></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;x;i=x,x=N[x].fa)&#123;</span><br><span class="line">        Splay(x);N[x][<span class="number">1</span>]=i;Up(x);<span class="comment">//Up-&gt;上传标记</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="mkroot"><a href="#mkroot" class="headerlink" title="mkroot"></a>mkroot</h3><p>把一个点变成根(树的根)<br>有了access，然后splay它他就成了splay的根了，但实际中序遍历还是最后<br>那再reverse一下就好了啊<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Mkroot</span><span class="params">(<span class="keyword">int</span> x)</span></span>&#123;</span><br><span class="line">    Access(x);Splay(x);N[x].fl^=<span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<hr>
+<p>还有一些零碎操作比如findroot什么的，很好想清楚，就不讲了</p>
+<h2 id="题"><a href="#题" class="headerlink" title="题"></a>题</h2><h3 id="弹飞绵羊"><a href="#弹飞绵羊" class="headerlink" title="弹飞绵羊"></a><a href="https://www.lydsy.com/JudgeOnline/problem.php?id=2002" target="_blank" rel="noopener">弹飞绵羊</a></h3><p>明显每次把儿子a从b接到c上，没有什么困难的东西<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"> </span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MN 400005</span></span><br><span class="line"> </span><br><span class="line"><span class="keyword">int</span> v[MN];</span><br><span class="line"><span class="keyword">int</span> n;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">namespace</span> CFA&#123;<span class="comment">//China Football Association!!</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">Node</span>&#123;</span></span><br><span class="line">        <span class="keyword">int</span> fa,s[<span class="number">2</span>],fl,sz;</span><br><span class="line">        <span class="keyword">int</span>&amp; <span class="keyword">operator</span>[](<span class="keyword">int</span> x)&#123;<span class="keyword">return</span> s[x];&#125;</span><br><span class="line">    &#125;N[MN];</span><br><span class="line"> </span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">Isroot</span><span class="params">(<span class="keyword">int</span> x)</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> N[N[x].fa][<span class="number">0</span>]!=x&amp;&amp;N[N[x].fa][<span class="number">1</span>]!=x;</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">Up</span><span class="params">(<span class="keyword">int</span> x)</span></span>&#123;</span><br><span class="line">        N[x].sz=N[N[x][<span class="number">0</span>]].sz+N[N[x][<span class="number">1</span>]].sz+<span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">Down</span><span class="params">(<span class="keyword">int</span> x)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(!N[x].fl)<span class="keyword">return</span>;</span><br><span class="line">        swap(N[x][<span class="number">1</span>],N[x][<span class="number">0</span>]);</span><br><span class="line">        N[N[x][<span class="number">0</span>]].fl^=<span class="number">1</span>;</span><br><span class="line">        N[N[x][<span class="number">1</span>]].fl^=<span class="number">1</span>;</span><br><span class="line">        N[x].fl=<span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">Rotate</span><span class="params">(<span class="keyword">int</span> x,<span class="keyword">int</span> y=<span class="number">0</span>)</span></span>&#123;</span><br><span class="line">        <span class="keyword">int</span> p=N[x].fa,f=N[p][<span class="number">0</span>]==x,pp=N[p].fa;</span><br><span class="line">        N[p][f^<span class="number">1</span>]=N[x][f];</span><br><span class="line">        N[N[x][f]].fa=p;</span><br><span class="line">        N[x][f]=p;N[p].fa=x;</span><br><span class="line">        Up(p);Up(x);</span><br><span class="line">        <span class="keyword">if</span>(N[pp][<span class="number">0</span>]==p)N[pp][<span class="number">0</span>]=x;</span><br><span class="line">        <span class="keyword">if</span>(N[pp][<span class="number">1</span>]==p)N[pp][<span class="number">1</span>]=x;</span><br><span class="line">        N[x].fa=pp;</span><br><span class="line">        <span class="keyword">if</span>(y)Rotate(y);</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    <span class="keyword">int</span> stk[MN],ssz=<span class="number">0</span>;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">Splay</span><span class="params">(<span class="keyword">int</span> x)</span></span>&#123;</span><br><span class="line">        assert(ssz==<span class="number">0</span>);</span><br><span class="line">        stk[++ssz]=x;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=x;!Isroot(i);i=N[i].fa)stk[++ssz]=N[i].fa;</span><br><span class="line">        <span class="keyword">while</span>(ssz)Down(stk[ssz--]);</span><br><span class="line">        <span class="keyword">while</span>(!Isroot(x))&#123;</span><br><span class="line">            <span class="keyword">int</span> p=N[x].fa,f=N[p][<span class="number">1</span>]==x,pp=N[p].fa,ff=N[pp][<span class="number">1</span>]==p;</span><br><span class="line">            <span class="keyword">if</span>(Isroot(p))Rotate(x);</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span>(f==ff)Rotate(p,x);</span><br><span class="line">            <span class="keyword">else</span> Rotate(x,x);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">Access</span><span class="params">(<span class="keyword">int</span> x)</span></span>&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;x;i=x,x=N[x].fa)&#123;</span><br><span class="line">            Splay(x);N[x][<span class="number">1</span>]=i;Up(x);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">Mkroot</span><span class="params">(<span class="keyword">int</span> x)</span></span>&#123;</span><br><span class="line">        Access(x);Splay(x);N[x].fl^=<span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">Link</span><span class="params">(<span class="keyword">int</span> x,<span class="keyword">int</span> y)</span></span>&#123;</span><br><span class="line">        Mkroot(x);N[x].fa=y;</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">Cut</span><span class="params">(<span class="keyword">int</span> x,<span class="keyword">int</span> y)</span></span>&#123;</span><br><span class="line">        Mkroot(x);Access(y);Splay(y);</span><br><span class="line">        N[y][<span class="number">0</span>]=N[x].fa=<span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;n);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n+<span class="number">1</span>;++i)CFA::N[i].sz=<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;++i)&#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%d"</span>,v+i);</span><br><span class="line">        CFA::Link(i,min(n+<span class="number">1</span>,i+v[i]));</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> q;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;q);</span><br><span class="line">    <span class="keyword">while</span>(q--)&#123;</span><br><span class="line">        <span class="keyword">int</span> op,x,y;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;op);</span><br><span class="line">        <span class="keyword">if</span>(op==<span class="number">1</span>)&#123;</span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;x);++x;</span><br><span class="line">            CFA::Mkroot(n+<span class="number">1</span>);CFA::Access(x);CFA::Splay(x);</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"%d\n"</span>,CFA::N[x].sz<span class="number">-1</span>);</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">"%d%d"</span>,&amp;x,&amp;y);++x;</span><br><span class="line">            CFA::Cut(x,min(n+<span class="number">1</span>,x+v[x]));</span><br><span class="line">            CFA::Link(x,min(n+<span class="number">1</span>,x+(v[x]=y)));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="洞穴勘测"><a href="#洞穴勘测" class="headerlink" title="洞穴勘测"></a><a href="https://www.lydsy.com/JudgeOnline/problem.php?id=2049" target="_blank" rel="noopener">洞穴勘测</a></h3><p>明显每次判断联不联通，没有什么困难的东西<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MN 10005</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">namespace</span> Tohsaka&#123;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">Node</span>&#123;</span></span><br><span class="line">        <span class="keyword">int</span> fa,fl,s[<span class="number">2</span>];</span><br><span class="line">        <span class="keyword">int</span>&amp; <span class="keyword">operator</span>[](<span class="keyword">int</span> x)&#123;<span class="keyword">return</span> s[x];&#125;</span><br><span class="line">    &#125;N[MN];</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">Down</span><span class="params">(<span class="keyword">int</span> x)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(N[x].fl)&#123;</span><br><span class="line">            N[N[x][<span class="number">0</span>]].fl^=<span class="number">1</span>;N[N[x][<span class="number">1</span>]].fl^=<span class="number">1</span>;</span><br><span class="line">            swap(N[x][<span class="number">0</span>],N[x][<span class="number">1</span>]);</span><br><span class="line">            N[x].fl=<span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">inline</span> <span class="keyword">bool</span> <span class="title">Isroot</span><span class="params">(<span class="keyword">int</span> x)</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> N[N[x].fa][<span class="number">0</span>]!=x&amp;&amp;N[N[x].fa][<span class="number">1</span>]!=x;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">Rotate</span><span class="params">(<span class="keyword">int</span> x)</span></span>&#123;</span><br><span class="line">        <span class="keyword">int</span> p=N[x].fa,pp=N[p].fa;</span><br><span class="line">        <span class="keyword">int</span> d=N[p][<span class="number">0</span>]==x;</span><br><span class="line">        N[N[x][d]].fa=p;</span><br><span class="line">        N[p][d^<span class="number">1</span>]=N[x][d];</span><br><span class="line">        N[p].fa=x;N[x][d]=p;</span><br><span class="line">        <span class="keyword">if</span>(N[pp][<span class="number">0</span>]==p)N[pp][<span class="number">0</span>]=x;</span><br><span class="line">        <span class="keyword">if</span>(N[pp][<span class="number">1</span>]==p)N[pp][<span class="number">1</span>]=x;</span><br><span class="line">        N[x].fa=pp;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> stk[MN],ttk=<span class="number">0</span>;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">Splay</span><span class="params">(<span class="keyword">int</span> x)</span></span>&#123;</span><br><span class="line">        stk[++ttk]=x;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=x;!Isroot(i);i=N[i].fa)stk[++ttk]=N[i].fa;</span><br><span class="line">        <span class="keyword">while</span>(ttk)Down(stk[ttk--]);</span><br><span class="line">        <span class="keyword">while</span>(!Isroot(x))&#123;</span><br><span class="line">            <span class="keyword">int</span> p=N[x].fa,pp=N[p].fa;</span><br><span class="line">            <span class="keyword">if</span>(Isroot(p))&#123;Rotate(x);<span class="keyword">continue</span>;&#125;</span><br><span class="line">            <span class="keyword">int</span> f=N[p][<span class="number">1</span>]==x,ff=N[pp][<span class="number">1</span>]==p;</span><br><span class="line">            <span class="keyword">if</span>(f==ff)&#123;</span><br><span class="line">                Rotate(p),Rotate(x);</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                Rotate(x),Rotate(x);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">Access</span><span class="params">(<span class="keyword">int</span> x)</span></span>&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;x;i=x,x=N[x].fa)&#123;</span><br><span class="line">            Splay(x);N[x][<span class="number">1</span>]=i;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">Mkroot</span><span class="params">(<span class="keyword">int</span> x)</span></span>&#123;</span><br><span class="line">        Access(x);Splay(x);N[x].fl^=<span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">Link</span><span class="params">(<span class="keyword">int</span> x,<span class="keyword">int</span> y)</span></span>&#123;</span><br><span class="line">        Mkroot(x);N[x].fa=y;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">Cut</span><span class="params">(<span class="keyword">int</span> x,<span class="keyword">int</span> y)</span></span>&#123;</span><br><span class="line">        Mkroot(x);Access(y);Splay(y);</span><br><span class="line">        N[x].fa=N[y][<span class="number">0</span>]=<span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">Fdroot</span><span class="params">(<span class="keyword">int</span> x)</span></span>&#123;</span><br><span class="line">        Access(x);Splay(x);</span><br><span class="line">        <span class="keyword">while</span>(N[x][<span class="number">0</span>])x=N[x][<span class="number">0</span>];</span><br><span class="line">        Splay(x);</span><br><span class="line">        <span class="keyword">return</span> x;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n,m;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d%d"</span>,&amp;n,&amp;m);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>,x,y;i&lt;=m;++i)&#123;</span><br><span class="line">        <span class="keyword">char</span> cc[<span class="number">11</span>];</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%s%d%d"</span>,cc,&amp;x,&amp;y);</span><br><span class="line">        <span class="keyword">if</span>(cc[<span class="number">0</span>]==<span class="string">'Q'</span>)&#123;</span><br><span class="line">            Tohsaka::Mkroot(x);</span><br><span class="line">            <span class="keyword">if</span>(Tohsaka::Fdroot(y)!=x)<span class="built_in">puts</span>(<span class="string">"No"</span>);</span><br><span class="line">            <span class="keyword">else</span> <span class="built_in">puts</span>(<span class="string">"Yes"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(cc[<span class="number">0</span>]==<span class="string">'C'</span>)&#123;</span><br><span class="line">            Tohsaka::Link(x,y);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(cc[<span class="number">0</span>]==<span class="string">'D'</span>)&#123;</span><br><span class="line">            Tohsaka::Cut(x,y);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+
+            <div class="post-copyright">
+    <div class="content">
+        <p>最后更新： 2018年09月12日 13:30</p>
+        <p>原始链接： <a class="post-url" href="/2018/09/01/lct/" title="Lct学习">http://tenecnt.github.io/2018/09/01/lct/</a></p>
+        <footer>
+            <a href="http://tenecnt.github.io">
+                <img src="/images/logo.png" alt="tenecnt">
+                tenecnt
+            </a>
+        </footer>
+    </div>
+</div>
+
+      
+        
+            
+
+        
+    </div>
+    <footer class="article-footer">
+        
+        
+<div class="post-share">
+    <a href="javascript:;" id="share-sub" class="post-share-fab">
+        <i class="fa fa-share-alt"></i>
+    </a>
+    <div class="post-share-list" id="share-list">
+        <ul class="share-icons">
+          <li>
+            <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://tenecnt.github.io/2018/09/01/lct/&title=《Lct学习》 — tenecnt's blog&pic=http://tenecnt.github.ioimages/logo.png" data-title="微博">
+              <i class="fa fa-weibo"></i>
+            </a>
+          </li>
+          <li>
+            <a class="weixin share-sns" id="wxFab" href="javascript:;" data-title="微信">
+              <i class="fa fa-weixin"></i>
+            </a>
+          </li>
+          <li>
+            <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://tenecnt.github.io/2018/09/01/lct/&title=《Lct学习》 — tenecnt's blog&source=" data-title="QQ">
+              <i class="fa fa-qq"></i>
+            </a>
+          </li>
+          <li>
+            <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://tenecnt.github.io/2018/09/01/lct/" data-title="Facebook">
+              <i class="fa fa-facebook"></i>
+            </a>
+          </li>
+          <li>
+            <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Lct学习》 — tenecnt's blog&url=http://tenecnt.github.io/2018/09/01/lct/&via=http://tenecnt.github.io" data-title="Twitter">
+              <i class="fa fa-twitter"></i>
+            </a>
+          </li>
+          <li>
+            <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://tenecnt.github.io/2018/09/01/lct/" data-title="Google+">
+              <i class="fa fa-google-plus"></i>
+            </a>
+          </li>
+        </ul>
+     </div>
+</div>
+<div class="post-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;" id="wxShare-close">×</a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://tenecnt.github.io/2018/09/01/lct/" alt="微信分享二维码">
+</div>
+
+<div class="mask"></div>
+
+        
+        <ul class="article-footer-menu">
+            
+            
+  <li class="article-footer-tags">
+    <i class="fa fa-tags"></i>
+      
+    <a href="/tags/图论/" class="color3">图论</a>
+      
+    <a href="/tags/数据结构/" class="color5">数据结构</a>
+      
+    <a href="/tags/lct/" class="color4">lct</a>
+      
+  </li>
+
+        </ul>
+        
+    </footer>
+  </div>
+</article>
+
+
+    <aside class="post-toc-pos post-toc-top" id="post-toc">
+        <nav class="post-toc-wrap">
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#概述"><span class="post-toc-text">概述</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#is-root"><span class="post-toc-text">is_root</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#access"><span class="post-toc-text">access</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#mkroot"><span class="post-toc-text">mkroot</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#题"><span class="post-toc-text">题</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#弹飞绵羊"><span class="post-toc-text">弹飞绵羊</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#洞穴勘测"><span class="post-toc-text">洞穴勘测</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+    
+
+<nav id="article-nav">
+  
+    <a href="/2018/09/20/fwt/" id="article-nav-newer" class="article-nav-link-wrap">
+
+      <span class="article-nav-title">
+        <i class="fa fa-hand-o-left" aria-hidden="true"></i>
+        
+          Fwt学习
+        
+      </span>
+    </a>
+  
+  
+    <a href="/2018/08/09/CCAugINM/" id="article-nav-older" class="article-nav-link-wrap">
+      <span class="article-nav-title">(CC 2018AugestLong)Interactive Matrix</span>
+      <i class="fa fa-hand-o-right" aria-hidden="true"></i>
+    </a>
+  
+</nav>
+
+
+
+    
+
+
+
+</section>
+        
+      </div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+      <p>
+        Powered by  <a href="http://hexo.io/" target="_blank">Hexo</a>
+        Theme <a href="//github.com/wongminho/hexo-theme-miho" target="_blank">MiHo</a>
+      &copy; 2018 tenecnt<br>
+      </p>
+    </div>
+
+    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script>
+  var mihoConfig = {
+      root: "http://tenecnt.github.io",
+      animate: true,
+      isHome: false,
+      share: true,
+      reward: 0
+  }
+</script>
+<div class="sidebar">
+    <div id="sidebar-search" title="Search">
+        <i class="fa fa-search"></i>
+    </div>
+    <div id="sidebar-category" title="Categories">
+        <i class="fa fa-book"></i>
+    </div>
+    <div id="sidebar-tag" title="Tags">
+        <i class="fa fa-tags"></i>
+    </div>
+    <div id="sidebar-top">
+        <span class="sidebar-top-icon"><i class="fa fa-angle-up"></i></span>
+    </div>
+</div>
+<div class="sidebar-menu-box" id="sidebar-menu-box">
+    <div class="sidebar-menu-box-container">
+        <div id="sidebar-menu-box-categories">
+            
+        </div>
+        <div id="sidebar-menu-box-tags">
+            <a href="/tags/CRT/" style="font-size: 10px;">CRT</a> <a href="/tags/NOI/" style="font-size: 15px;">NOI</a> <a href="/tags/fwt/" style="font-size: 10px;">fwt</a> <a href="/tags/lct/" style="font-size: 10px;">lct</a> <a href="/tags/math/" style="font-size: 10px;">math</a> <a href="/tags/乱搞/" style="font-size: 10px;">乱搞</a> <a href="/tags/交互题/" style="font-size: 10px;">交互题</a> <a href="/tags/图论/" style="font-size: 20px;">图论</a> <a href="/tags/多项式/" style="font-size: 15px;">多项式</a> <a href="/tags/字符串/" style="font-size: 10px;">字符串</a> <a href="/tags/数列/" style="font-size: 10px;">数列</a> <a href="/tags/数据结构/" style="font-size: 10px;">数据结构</a> <a href="/tags/数论/" style="font-size: 15px;">数论</a> <a href="/tags/数论筛/" style="font-size: 10px;">数论筛</a> <a href="/tags/最大团/" style="font-size: 10px;">最大团</a> <a href="/tags/树状数组/" style="font-size: 10px;">树状数组</a> <a href="/tags/生成树/" style="font-size: 10px;">生成树</a> <a href="/tags/组合数学/" style="font-size: 15px;">组合数学</a> <a href="/tags/规划/" style="font-size: 10px;">规划</a> <a href="/tags/试验/" style="font-size: 10px;">试验</a> <a href="/tags/递推式/" style="font-size: 10px;">递推式</a>
+        </div>
+    </div>
+    <a href="javascript:;" class="sidebar-menu-box-close">&times;</a>
+</div>
+<div class="mobile-header-menu-nav" id="mobile-header-menu-nav">
+    <div class="mobile-header-menu-container">
+        <span class="title">Menus</span>
+        <ul class="mobile-header-menu-navbar">
+            
+            <li>
+                <a  href="/">
+                    <i class="fa fa-home"></i><span>Home</span>
+                </a>
+            </li>
+            
+            <li>
+                <a  href="/archives">
+                    <i class="fa fa-archive"></i><span>Archives</span>
+                </a>
+            </li>
+            
+            <li>
+                <a  href="/friends">
+                    <i class="fa fa-user"></i><span>friends</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    <div class="mobile-header-tag-container">
+        <span class="title">Tags</span>
+        <div id="mobile-header-container-tags">
+            <a href="/tags/CRT/" style="font-size: 10px;">CRT</a> <a href="/tags/NOI/" style="font-size: 15px;">NOI</a> <a href="/tags/fwt/" style="font-size: 10px;">fwt</a> <a href="/tags/lct/" style="font-size: 10px;">lct</a> <a href="/tags/math/" style="font-size: 10px;">math</a> <a href="/tags/乱搞/" style="font-size: 10px;">乱搞</a> <a href="/tags/交互题/" style="font-size: 10px;">交互题</a> <a href="/tags/图论/" style="font-size: 20px;">图论</a> <a href="/tags/多项式/" style="font-size: 15px;">多项式</a> <a href="/tags/字符串/" style="font-size: 10px;">字符串</a> <a href="/tags/数列/" style="font-size: 10px;">数列</a> <a href="/tags/数据结构/" style="font-size: 10px;">数据结构</a> <a href="/tags/数论/" style="font-size: 15px;">数论</a> <a href="/tags/数论筛/" style="font-size: 10px;">数论筛</a> <a href="/tags/最大团/" style="font-size: 10px;">最大团</a> <a href="/tags/树状数组/" style="font-size: 10px;">树状数组</a> <a href="/tags/生成树/" style="font-size: 10px;">生成树</a> <a href="/tags/组合数学/" style="font-size: 15px;">组合数学</a> <a href="/tags/规划/" style="font-size: 10px;">规划</a> <a href="/tags/试验/" style="font-size: 10px;">试验</a> <a href="/tags/递推式/" style="font-size: 10px;">递推式</a>
+        </div>
+    </div>
+</div>
+<div class="search-wrap">
+    <span class="search-close">&times;</span>
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+            <i class="icon icon-lg icon-chevron-left"></i>
+        </a>
+        <input class="search-field" placeholder="Search..." id="keywords">
+        <a id="search-submit" href="javascript:;">
+            <i class="fa fa-search"></i>
+        </a>
+    <div class="search-container" id="search-container">
+        <ul class="search-result" id="search-result">
+        </ul>
+    </div>
+</div>
+
+<div id="search-tpl">
+    <li class="search-result-item">
+        <a href="{url}" class="search-item-li">
+            <span class="search-item-li-title" title="{title}">{title}</span>
+        </a>
+    </li>
+</div>
+
+<script src="/js/search.js"></script>
+<script src="/js/main.js"></script>
+
+
+  <script src="//cdn.bootcss.com/particles.js/2.0.0/particles.min.js"></script>
+  <div id="particles"></div>
+  <script src="/js/particles.js"></script>
+
+
+
+
+
+
+
+  <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
+  <script src="//cdn.bootcss.com/scrollReveal.js/3.0.5/scrollreveal.js"></script>
+  <script src="/js/animate.js"></script>
+
+
+  <script src="/js/pop-img.js"></script>
+  <script>
+     $(".article-entry p img").popImg();
+  </script>
+
+  </div><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</body>
+</html>
