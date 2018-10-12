@@ -10,4 +10,8 @@ They are my friends
 
  - <a href="https://cnblogs.com/Apocrypha" target="_blank" style="font-family:arial;color:black;font-size:20px;">a<href="https://cnblogs.com/Apocrypha" target="_blank" style="font-family:arial;color:red;font-size:20px;">pocrypha</a>
 
+ - <a href="https://jhdjames37.github.io" target="_blank" style="font-family:arial;color:black;font-size:20px;">j<href="https://jhdjames37.github.io" target="_blank" style="font-family:arial;color:red;font-size:20px;">hdjames37</a>
+ 
+
+
 
