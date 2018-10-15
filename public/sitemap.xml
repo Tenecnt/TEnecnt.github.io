@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://tenecnt.github.io/2018/10/15/MLGS/</loc>
+    
+    <lastmod>2018-10-15T13:08:53.459Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://tenecnt.github.io/friends/index.html</loc>
     
     <lastmod>2018-10-12T03:48:03.834Z</lastmod>
@@ -58,14 +65,14 @@
   </url>
   
   <url>
-    <loc>http://tenecnt.github.io/2018/07/24/bzoj5170/</loc>
+    <loc>http://tenecnt.github.io/2018/07/16/todolist/</loc>
     
     <lastmod>2018-09-12T05:30:32.874Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://tenecnt.github.io/2018/07/16/todolist/</loc>
+    <loc>http://tenecnt.github.io/2018/07/22/noi18d/</loc>
     
     <lastmod>2018-09-12T05:30:32.874Z</lastmod>
     
@@ -121,7 +128,7 @@
   </url>
   
   <url>
-    <loc>http://tenecnt.github.io/2018/07/22/noi18d/</loc>
+    <loc>http://tenecnt.github.io/2018/07/24/bzoj5170/</loc>
     
     <lastmod>2018-09-12T05:30:32.874Z</lastmod>
     
