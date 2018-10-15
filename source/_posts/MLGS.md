@@ -9,7 +9,7 @@ tags:
 cover_picture: images/Malygos.jpg
 ---
 
-[![LaLaLa](images/Malygos.jpg)](http://uoj.ac/problem/36)
+[![LaLaLa](../images/Malygos.jpg)](http://uoj.ac/problem/36)
 
 线性基模板题
 
