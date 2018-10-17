@@ -90,7 +90,7 @@ poly bm(poly s){
             now.pb(M(ml,llst[j]));
         }
         if(now.size()<lst.size())now.resize(lst.size());
-        for(unsigned j=0;j<now.size();++j){
+        for(unsigned j=0;j<lst.size();++j){
             now[j]=A(now[j],lst[j]);
         }
         if(i-lfail+llst.size()>=lst.size())llst=lst,lfail=fail;
