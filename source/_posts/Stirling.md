@@ -39,13 +39,21 @@ $$\begin{Bmatrix} n \\ k \end{Bmatrix}$$
 
 ### 意义
 
-由 $$n$$ 个数构成集合的方案数
+由 $$n$$ 个数构成非空集合的方案数
 
 ### 递推式
 
 $$\begin{Bmatrix} n \\ k \end{Bmatrix} = \begin{Bmatrix} n-1 \\ k-1 \end{Bmatrix} + k\begin{Bmatrix} n-1 \\ k \end{Bmatrix} $$
 
-解释很简单，对于新加的$$n$$,要么单独成一个置换，要么放在某个的后面
+解释很简单，对于新加的$$n$$,要么单独成一个非空集合，要么放在某个的后面
+
+### 容斥
+
+$$
+\begin{Bmatrix} n \\ m \end{Bmatrix} =\frac{1}{m!} \sum_{k = 0}^m (-1)^{k}\begin{pmatrix} m \\ k \end{pmatrix} (m-k)^{n} 
+$$
+
+解释很简单，就是容斥
 
 ### 用途
 
