@@ -32,7 +32,7 @@
 <meta property="og:site_name" content="tenecnt&#39;s blog">
 <meta property="og:description" content="昨天学习了一发Stirling数哒哒哒，感觉很有用 首先，Stirling数哒哒哒分两类 第一类Stirling数\begin{bmatrix} n \\ k \end{bmatrix}这表示第一类Stirling数哒哒哒 意义由 n 个数构成置换的方案数 递推式\begin{bmatrix} n \\ k \end{bmatrix} = \begin{bmatrix} n-1 \\ k-1 \e">
 <meta property="og:locale" content="中文">
-<meta property="og:updated_time" content="2018-09-12T05:30:32.874Z">
+<meta property="og:updated_time" content="2019-01-14T10:47:24.892Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Stirling学习">
 <meta name="twitter:description" content="昨天学习了一发Stirling数哒哒哒，感觉很有用 首先，Stirling数哒哒哒分两类 第一类Stirling数\begin{bmatrix} n \\ k \end{bmatrix}这表示第一类Stirling数哒哒哒 意义由 n 个数构成置换的方案数 递推式\begin{bmatrix} n \\ k \end{bmatrix} = \begin{bmatrix} n-1 \\ k-1 \e">
@@ -176,12 +176,14 @@ ga('send', 'pageview');
 <h3 id="意义"><a href="#意义" class="headerlink" title="意义"></a>意义</h3><p>由 <script type="math/tex">n</script> 个数构成置换的方案数</p>
 <h3 id="递推式"><a href="#递推式" class="headerlink" title="递推式"></a>递推式</h3><script type="math/tex; mode=display">\begin{bmatrix} n \\ k \end{bmatrix} = \begin{bmatrix} n-1 \\ k-1 \end{bmatrix} + (n-1)\begin{bmatrix} n-1 \\ k \end{bmatrix}</script><p>解释很简单，对于新加的<script type="math/tex">n</script>,要么单独成一个置换，要么放在某个的后面</p>
 <h3 id="用途"><a href="#用途" class="headerlink" title="用途"></a>用途</h3><script type="math/tex; mode=display">x^{\overline{n}} = \sum_{k}\begin{bmatrix} n \\ k \end{bmatrix}x^{k}</script><script type="math/tex; mode=display">x^{\underline{n}} = \sum_{k}\begin{bmatrix} n \\ k \end{bmatrix}(-1)^{n-k}x^{k}</script><h2 id="第二类Stirling数"><a href="#第二类Stirling数" class="headerlink" title="第二类Stirling数"></a>第二类Stirling数</h2><script type="math/tex; mode=display">\begin{Bmatrix} n \\ k \end{Bmatrix}</script><p>这表示第二类Stirling数<del>哒哒哒</del></p>
-<h3 id="意义-1"><a href="#意义-1" class="headerlink" title="意义"></a>意义</h3><p>由 <script type="math/tex">n</script> 个数构成集合的方案数</p>
-<h3 id="递推式-1"><a href="#递推式-1" class="headerlink" title="递推式"></a>递推式</h3><script type="math/tex; mode=display">\begin{Bmatrix} n \\ k \end{Bmatrix} = \begin{Bmatrix} n-1 \\ k-1 \end{Bmatrix} + k\begin{Bmatrix} n-1 \\ k \end{Bmatrix}</script><p>解释很简单，对于新加的<script type="math/tex">n</script>,要么单独成一个置换，要么放在某个的后面</p>
+<h3 id="意义-1"><a href="#意义-1" class="headerlink" title="意义"></a>意义</h3><p>由 <script type="math/tex">n</script> 个数构成非空集合的方案数</p>
+<h3 id="递推式-1"><a href="#递推式-1" class="headerlink" title="递推式"></a>递推式</h3><script type="math/tex; mode=display">\begin{Bmatrix} n \\ k \end{Bmatrix} = \begin{Bmatrix} n-1 \\ k-1 \end{Bmatrix} + k\begin{Bmatrix} n-1 \\ k \end{Bmatrix}</script><p>解释很简单，对于新加的<script type="math/tex">n</script>,要么单独成一个非空集合，要么放在某个的后面</p>
+<h3 id="容斥"><a href="#容斥" class="headerlink" title="容斥"></a>容斥</h3><script type="math/tex; mode=display">
+\begin{Bmatrix} n \\ m \end{Bmatrix} =\frac{1}{m!} \sum_{k = 0}^m (-1)^{k}\begin{pmatrix} m \\ k \end{pmatrix} (m-k)^{n}</script><p>解释很简单，就是容斥</p>
 <h3 id="用途-1"><a href="#用途-1" class="headerlink" title="用途"></a>用途</h3><script type="math/tex; mode=display">x^{n} = \sum_{k}\begin{Bmatrix} n \\ k \end{Bmatrix}x^{\underline{k}}</script><script type="math/tex; mode=display">x^{n} = \sum_{k}\begin{Bmatrix} n \\ k \end{Bmatrix}(-1)^{n-k}x^{\overline{k}}</script>
             <div class="post-copyright">
     <div class="content">
-        <p>最后更新： 2018年09月12日 13:30</p>
+        <p>最后更新： 2019年01月14日 18:47</p>
         <p>原始链接： <a class="post-url" href="/2018/07/24/Stirling/" title="Stirling学习">http://tenecnt.github.io/2018/07/24/Stirling/</a></p>
         <footer>
             <a href="http://tenecnt.github.io">
@@ -268,7 +270,7 @@ ga('send', 'pageview');
 
     <aside class="post-toc-pos post-toc-top" id="post-toc">
         <nav class="post-toc-wrap">
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#第一类Stirling数"><span class="post-toc-text">第一类Stirling数</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#意义"><span class="post-toc-text">意义</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#递推式"><span class="post-toc-text">递推式</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#用途"><span class="post-toc-text">用途</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#第二类Stirling数"><span class="post-toc-text">第二类Stirling数</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#意义-1"><span class="post-toc-text">意义</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#递推式-1"><span class="post-toc-text">递推式</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#用途-1"><span class="post-toc-text">用途</span></a></li></ol></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#第一类Stirling数"><span class="post-toc-text">第一类Stirling数</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#意义"><span class="post-toc-text">意义</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#递推式"><span class="post-toc-text">递推式</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#用途"><span class="post-toc-text">用途</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#第二类Stirling数"><span class="post-toc-text">第二类Stirling数</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#意义-1"><span class="post-toc-text">意义</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#递推式-1"><span class="post-toc-text">递推式</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#容斥"><span class="post-toc-text">容斥</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#用途-1"><span class="post-toc-text">用途</span></a></li></ol></li></ol>
         </nav>
     </aside>
     
@@ -319,7 +321,7 @@ ga('send', 'pageview');
       <p>
         Powered by  <a href="http://hexo.io/" target="_blank">Hexo</a>
         Theme <a href="//github.com/wongminho/hexo-theme-miho" target="_blank">MiHo</a>
-      &copy; 2018 tenecnt<br>
+      &copy; 2019 tenecnt<br>
       </p>
     </div>
 
@@ -354,7 +356,7 @@ ga('send', 'pageview');
             
         </div>
         <div id="sidebar-menu-box-tags">
-            <a href="/tags/CRT/" style="font-size: 10px;">CRT</a> <a href="/tags/NOI/" style="font-size: 15px;">NOI</a> <a href="/tags/fwt/" style="font-size: 10px;">fwt</a> <a href="/tags/lct/" style="font-size: 10px;">lct</a> <a href="/tags/math/" style="font-size: 10px;">math</a> <a href="/tags/suffix/" style="font-size: 10px;">suffix</a> <a href="/tags/乱搞/" style="font-size: 10px;">乱搞</a> <a href="/tags/交互题/" style="font-size: 10px;">交互题</a> <a href="/tags/后缀自动机/" style="font-size: 10px;">后缀自动机</a> <a href="/tags/图论/" style="font-size: 20px;">图论</a> <a href="/tags/多项式/" style="font-size: 15px;">多项式</a> <a href="/tags/字符串/" style="font-size: 15px;">字符串</a> <a href="/tags/数列/" style="font-size: 15px;">数列</a> <a href="/tags/数据结构/" style="font-size: 10px;">数据结构</a> <a href="/tags/数论/" style="font-size: 15px;">数论</a> <a href="/tags/数论筛/" style="font-size: 10px;">数论筛</a> <a href="/tags/最大团/" style="font-size: 10px;">最大团</a> <a href="/tags/树状数组/" style="font-size: 10px;">树状数组</a> <a href="/tags/生成树/" style="font-size: 10px;">生成树</a> <a href="/tags/线性基/" style="font-size: 10px;">线性基</a> <a href="/tags/组合数学/" style="font-size: 15px;">组合数学</a> <a href="/tags/规划/" style="font-size: 10px;">规划</a> <a href="/tags/试验/" style="font-size: 10px;">试验</a> <a href="/tags/递推式/" style="font-size: 15px;">递推式</a>
+            <a href="/tags/线性规划/" style="font-size: 10px;">-线性规划</a> <a href="/tags/CRT/" style="font-size: 10px;">CRT</a> <a href="/tags/NOI/" style="font-size: 15px;">NOI</a> <a href="/tags/fwt/" style="font-size: 10px;">fwt</a> <a href="/tags/lct/" style="font-size: 10px;">lct</a> <a href="/tags/math/" style="font-size: 10px;">math</a> <a href="/tags/suffix/" style="font-size: 10px;">suffix</a> <a href="/tags/乱搞/" style="font-size: 10px;">乱搞</a> <a href="/tags/交互题/" style="font-size: 10px;">交互题</a> <a href="/tags/后缀自动机/" style="font-size: 10px;">后缀自动机</a> <a href="/tags/图论/" style="font-size: 20px;">图论</a> <a href="/tags/多项式/" style="font-size: 15px;">多项式</a> <a href="/tags/字符串/" style="font-size: 15px;">字符串</a> <a href="/tags/数列/" style="font-size: 15px;">数列</a> <a href="/tags/数据结构/" style="font-size: 10px;">数据结构</a> <a href="/tags/数论/" style="font-size: 15px;">数论</a> <a href="/tags/数论筛/" style="font-size: 10px;">数论筛</a> <a href="/tags/最大团/" style="font-size: 10px;">最大团</a> <a href="/tags/树状数组/" style="font-size: 10px;">树状数组</a> <a href="/tags/生成树/" style="font-size: 10px;">生成树</a> <a href="/tags/线性基/" style="font-size: 10px;">线性基</a> <a href="/tags/组合数学/" style="font-size: 15px;">组合数学</a> <a href="/tags/规划/" style="font-size: 10px;">规划</a> <a href="/tags/试验/" style="font-size: 10px;">试验</a> <a href="/tags/递推式/" style="font-size: 15px;">递推式</a>
         </div>
     </div>
     <a href="javascript:;" class="sidebar-menu-box-close">&times;</a>
@@ -387,7 +389,7 @@ ga('send', 'pageview');
     <div class="mobile-header-tag-container">
         <span class="title">Tags</span>
         <div id="mobile-header-container-tags">
-            <a href="/tags/CRT/" style="font-size: 10px;">CRT</a> <a href="/tags/NOI/" style="font-size: 15px;">NOI</a> <a href="/tags/fwt/" style="font-size: 10px;">fwt</a> <a href="/tags/lct/" style="font-size: 10px;">lct</a> <a href="/tags/math/" style="font-size: 10px;">math</a> <a href="/tags/suffix/" style="font-size: 10px;">suffix</a> <a href="/tags/乱搞/" style="font-size: 10px;">乱搞</a> <a href="/tags/交互题/" style="font-size: 10px;">交互题</a> <a href="/tags/后缀自动机/" style="font-size: 10px;">后缀自动机</a> <a href="/tags/图论/" style="font-size: 20px;">图论</a> <a href="/tags/多项式/" style="font-size: 15px;">多项式</a> <a href="/tags/字符串/" style="font-size: 15px;">字符串</a> <a href="/tags/数列/" style="font-size: 15px;">数列</a> <a href="/tags/数据结构/" style="font-size: 10px;">数据结构</a> <a href="/tags/数论/" style="font-size: 15px;">数论</a> <a href="/tags/数论筛/" style="font-size: 10px;">数论筛</a> <a href="/tags/最大团/" style="font-size: 10px;">最大团</a> <a href="/tags/树状数组/" style="font-size: 10px;">树状数组</a> <a href="/tags/生成树/" style="font-size: 10px;">生成树</a> <a href="/tags/线性基/" style="font-size: 10px;">线性基</a> <a href="/tags/组合数学/" style="font-size: 15px;">组合数学</a> <a href="/tags/规划/" style="font-size: 10px;">规划</a> <a href="/tags/试验/" style="font-size: 10px;">试验</a> <a href="/tags/递推式/" style="font-size: 15px;">递推式</a>
+            <a href="/tags/线性规划/" style="font-size: 10px;">-线性规划</a> <a href="/tags/CRT/" style="font-size: 10px;">CRT</a> <a href="/tags/NOI/" style="font-size: 15px;">NOI</a> <a href="/tags/fwt/" style="font-size: 10px;">fwt</a> <a href="/tags/lct/" style="font-size: 10px;">lct</a> <a href="/tags/math/" style="font-size: 10px;">math</a> <a href="/tags/suffix/" style="font-size: 10px;">suffix</a> <a href="/tags/乱搞/" style="font-size: 10px;">乱搞</a> <a href="/tags/交互题/" style="font-size: 10px;">交互题</a> <a href="/tags/后缀自动机/" style="font-size: 10px;">后缀自动机</a> <a href="/tags/图论/" style="font-size: 20px;">图论</a> <a href="/tags/多项式/" style="font-size: 15px;">多项式</a> <a href="/tags/字符串/" style="font-size: 15px;">字符串</a> <a href="/tags/数列/" style="font-size: 15px;">数列</a> <a href="/tags/数据结构/" style="font-size: 10px;">数据结构</a> <a href="/tags/数论/" style="font-size: 15px;">数论</a> <a href="/tags/数论筛/" style="font-size: 10px;">数论筛</a> <a href="/tags/最大团/" style="font-size: 10px;">最大团</a> <a href="/tags/树状数组/" style="font-size: 10px;">树状数组</a> <a href="/tags/生成树/" style="font-size: 10px;">生成树</a> <a href="/tags/线性基/" style="font-size: 10px;">线性基</a> <a href="/tags/组合数学/" style="font-size: 15px;">组合数学</a> <a href="/tags/规划/" style="font-size: 10px;">规划</a> <a href="/tags/试验/" style="font-size: 10px;">试验</a> <a href="/tags/递推式/" style="font-size: 15px;">递推式</a>
         </div>
     </div>
 </div>
