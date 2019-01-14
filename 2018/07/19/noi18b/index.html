@@ -1,0 +1,473 @@
+<script>
+  fetch('https://v1.hitokoto.cn')
+    .then(function (res){
+      return res.json();
+    })
+    .then(function (data) {
+      var hitokoto = document.getElementById('hitokoto');
+      hitokoto.innerText = "『 " + data.hitokoto + " 』";
+      var from = document.getElementById('hitokoto-from');
+      from.innerText = "——" + data.from + "\b\b\b\b\b\b\b\b\b";
+    })
+    .catch(function (err) {
+      console.error(err);
+    })
+</script>
+<!DOCTYPE html>
+<html>
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+  
+  <title>NOI2018冒泡排序(inverse) | tenecnt&#39;s blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+    <meta name="keywords" content="2333" />
+  
+  
+  <meta name="description" content="这道题的冒泡排序好像是假的 首先，根据那个啥的定义，首先必须得到坏序列的充要条件是  \exists\;{i a_{k}证明就感性理解一下，对于中间那个数，无论它目标位置是在左边还是右边，都有至少一步向反方向移动，所以一定是坏序列了 80 然后80分就很简单了，设计这么一个函数，F_{i,j}表示目前有i个数需要排列，但是由于前面的数的限制，最小的$j$个数的相对顺序必须递增。 容易得到递推式：">
+<meta name="keywords" content="组合数学,NOI">
+<meta property="og:type" content="article">
+<meta property="og:title" content="NOI2018冒泡排序(inverse)">
+<meta property="og:url" content="http://tenecnt.github.io/2018/07/19/noi18b/index.html">
+<meta property="og:site_name" content="tenecnt&#39;s blog">
+<meta property="og:description" content="这道题的冒泡排序好像是假的 首先，根据那个啥的定义，首先必须得到坏序列的充要条件是  \exists\;{i a_{k}证明就感性理解一下，对于中间那个数，无论它目标位置是在左边还是右边，都有至少一步向反方向移动，所以一定是坏序列了 80 然后80分就很简单了，设计这么一个函数，F_{i,j}表示目前有i个数需要排列，但是由于前面的数的限制，最小的$j$个数的相对顺序必须递增。 容易得到递推式：">
+<meta property="og:locale" content="中文">
+<meta property="og:updated_time" content="2019-01-14T10:47:24.892Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="NOI2018冒泡排序(inverse)">
+<meta name="twitter:description" content="这道题的冒泡排序好像是假的 首先，根据那个啥的定义，首先必须得到坏序列的充要条件是  \exists\;{i a_{k}证明就感性理解一下，对于中间那个数，无论它目标位置是在左边还是右边，都有至少一步向反方向移动，所以一定是坏序列了 80 然后80分就很简单了，设计这么一个函数，F_{i,j}表示目前有i个数需要排列，但是由于前面的数的限制，最小的$j$个数的相对顺序必须递增。 容易得到递推式：">
+  
+  
+    <link rel="icon" href="/Gus.ico">
+  
+  <link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css">
+  <script src="/js/pace.min.js"></script>
+  <script src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-122354200-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics --><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+  
+  
+
+</head>
+
+<body>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="container">
+      <header id="header">
+    <div id="banner"></div>
+    <div id="header-outer">
+        <div id="header-menu" class="header-menu-pos animated">
+            <div class="header-menu-container">
+                <a href="/" class="left">
+                    <span class="site-title">Tenecnt&#39;s Blog</span>
+                </a>
+                <nav id="header-menu-nav" class="right">
+                    
+                    <a  href="/">
+                        <i class="fa fa-home"></i>
+                        <span>Home</span>
+                    </a>
+                    
+                    <a  href="/archives">
+                        <i class="fa fa-archive"></i>
+                        <span>Archives</span>
+                    </a>
+                    
+                    <a  href="/friends">
+                        <i class="fa fa-user"></i>
+                        <span>friends</span>
+                    </a>
+                    
+                </nav>
+                <a class="mobile-header-menu-button">
+                    <i class="fa fa-bars"></i>
+                </a>
+            </div>
+        </div>
+        <div id="header-row">
+            <div id="logo">
+                <a href="/">
+                    <img src="/images/head.png" alt="logo">
+                </a>
+            </div>
+            <div class="header-info">
+                <div id="header-title">
+                    
+                    <h2>
+                        Tenecnt&#39;s Blog
+                    </h2>
+                    
+                </div>
+                <div id="header-description">
+                    
+                    <h3>
+                        2333
+                    </h3>
+                    
+                </div>
+            </div>
+            <nav class="header-nav">
+                <div class="social">
+                    
+                        <a title="2333" target="_blank" href="//teencnt.github.com">
+                            <i class="fa fa-home fa-2x"></i></a>
+                    
+                        <a title="Github" target="_blank" href="//github.com/tenecnt">
+                            <i class="fa fa-github fa-2x"></i></a>
+                    
+                        <a title="Twitter" target="_blank" href="//twitter.com/tenecnt">
+                            <i class="fa fa-twitter fa-2x"></i></a>
+                    
+                </div>
+            </nav>
+        </div>
+    </div>
+</header>
+      <div class="outer">
+
+        <section id="main" class="body-wrap">
+<article id="post-noi18b" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="post-title" itemprop="name">
+      NOI2018冒泡排序(inverse)
+    </h1>
+    <div class="post-title-bar">
+      <ul>
+          
+        <li>
+          <i class="fa fa-calendar"></i>  2018-07-19
+        </li>
+        <li>
+          <i class="fa fa-eye"></i>
+          <span id="busuanzi_value_page_pv"></span>
+          
+        </li>
+      </ul>
+    </div>
+  
+
+
+          
+      </header>
+    
+    <div class="article-entry post-content" itemprop="articleBody">
+      
+            
+            <p><a href="https://judge-duck.online:10086/problem/noi18b" target="_blank" rel="noopener">这道题</a>的冒泡排序好像是假的</p>
+<p>首先，根据那个啥的定义，首先必须得到坏序列的充要条件是 </p>
+<script type="math/tex; mode=display">\exists\;{i<j<k},a_{i} > a_{j} > a_{k}</script><p>证明就感性理解一下，对于中间那个数，无论它目标位置是在左边还是右边，都有至少一步向反方向移动，所以一定是坏序列了</p>
+<h3 id="80"><a href="#80" class="headerlink" title="80"></a>80</h3><hr>
+<p>然后80分就很简单了，设计这么一个函数，<script type="math/tex">F_{i,j}</script>表示目前有i个数需要排列，但是由于前面的数的限制，最小的$j$个数的相对顺序必须递增。</p>
+<p>容易得到递推式： </p>
+<script type="math/tex; mode=display">F_{i,j} = \sum^{j-1}_{k=i} F_{i-1,k}</script><p>其实就是枚举拿的是哪个数，最小数就是<script type="math/tex">F_{i-1,k}</script>,否则对应了各个数。</p>
+<p>然后就拿这个东西像数位dp一样扫一遍过去就是O(<script type="math/tex">n^2</script>)了</p>
+<h3 id="100"><a href="#100" class="headerlink" title="100"></a>100</h3><hr>
+<p>满分算法就比较神仙了</p>
+<p>曾经有这样一道<a href="https://www.codechef.com/APRIL18B/problems/VAIMIN" target="_blank" rel="noopener">题</a></p>
+<p>为了解决在一条直线限制下A点走到B点的方案数，这里用到了一种高妙的方法，将起点按对称线翻转计数，这里的每一种方案刚好一一对应了一种原起点到终点的一种路线(想象将该路线第一次遇到对称轴前的路径翻折)，于是这样，就能解决上述的小问题。</p>
+<p>那么，对于这个问题，我们可以发现，在dp转移的时候，其实对应了一个长度为2n的括号序列。</p>
+<p>每次转移对应了在原串后面加上了若干左括号和一个右括号（当取的是最小数时对应0个左括号+1个右括号）</p>
+<p>然后将左括号和右括号转化成在二维坐标上的两个向右上（下）45度的向量，所以这就成了一个在二维上自由行走（但不能低于x轴）的问题，同时必须满足中途没有低于过一条线（除非已经高于过这条直线）。</p>
+<p>于是想80分一样，对于每一位统计在这位超过限制的答案数，这里可以发现，只要先多出现了一个左括号，后面的左括号都能在自由行走中补充，所以每位的统计可以O(1)，这就使总体复杂度化为O(n)了</p>
+<p><del>可是我为了偷懒，没有维护目前比最大值小的值数，用树状数组，多了一个log</del></p>
+<p><del>能过就行</del></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> lg long long</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MN 1200005</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> lsk 998244353</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> lb(x) ((x)&amp;(-(x)))</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> n;</span><br><span class="line"><span class="keyword">int</span> a[MN&gt;&gt;<span class="number">1</span>],c[MN&gt;&gt;<span class="number">1</span>],D[MN&gt;&gt;<span class="number">1</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">read</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="keyword">static</span> <span class="keyword">int</span> d;<span class="keyword">static</span> <span class="keyword">char</span> c;</span><br><span class="line">	<span class="keyword">for</span>(d=<span class="number">0</span>,c=getchar();c&lt;<span class="string">'0'</span>||c&gt;<span class="string">'9'</span>;c=getchar());</span><br><span class="line">	<span class="keyword">for</span>(;c&gt;=<span class="string">'0'</span>&amp;&amp;c&lt;=<span class="string">'9'</span>;d=(d&lt;&lt;<span class="number">3</span>)+(d&lt;&lt;<span class="number">1</span>)+c-<span class="string">'0'</span>,c=getchar());</span><br><span class="line">	<span class="keyword">return</span> d;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> x,<span class="keyword">int</span> y)</span></span>&#123;</span><br><span class="line">	<span class="keyword">for</span>(;x&lt;=n;x+=lb(x))c[x]+=y;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">qry</span><span class="params">(<span class="keyword">int</span> x)</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> res=<span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span>(;x;x-=lb(x))res+=c[x];</span><br><span class="line">	<span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">lg fac[MN],ifac[MN];</span><br><span class="line"></span><br><span class="line"><span class="function">lg <span class="title">Pow</span><span class="params">(lg A,lg B)</span></span>&#123;</span><br><span class="line">	lg res=<span class="number">1</span>;</span><br><span class="line">	<span class="keyword">for</span>(;B;B&gt;&gt;=<span class="number">1</span>,A=A*A%lsk)<span class="keyword">if</span>(B&amp;<span class="number">1</span>)res=res*A%lsk;</span><br><span class="line">	<span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">init</span><span class="params">()</span></span>&#123;</span><br><span class="line">	fac[<span class="number">0</span>]=ifac[<span class="number">0</span>]=<span class="number">1</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;MN;++i)&#123;</span><br><span class="line">		fac[i]=fac[i<span class="number">-1</span>]*i%lsk;</span><br><span class="line">		ifac[i]=Pow(fac[i],lsk<span class="number">-2</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function">lg <span class="title">C</span><span class="params">(<span class="keyword">int</span> A,<span class="keyword">int</span> B)</span></span>&#123;</span><br><span class="line">	<span class="keyword">return</span> fac[A]*ifac[B]%lsk*ifac[A-B]%lsk;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function">lg <span class="title">Q</span><span class="params">(<span class="keyword">int</span> A,<span class="keyword">int</span> B)</span></span>&#123;</span><br><span class="line">	<span class="keyword">return</span> C(A,(A+B)/<span class="number">2</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function">lg <span class="title">T</span><span class="params">(<span class="keyword">int</span> A,<span class="keyword">int</span> B)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(B&lt;<span class="number">0</span>)<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">return</span> ((Q(A,B)-Q(A,B+<span class="number">2</span>))%lsk+lsk)%lsk;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> TT;init();</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;TT);</span><br><span class="line">	<span class="keyword">while</span>(TT--)&#123;</span><br><span class="line">		<span class="built_in">memset</span>(D,<span class="number">0</span>,<span class="keyword">sizeof</span> D);</span><br><span class="line">		<span class="built_in">memset</span>(c,<span class="number">0</span>,<span class="keyword">sizeof</span> c);</span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;n);lg res=<span class="number">0</span>;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;++i)add(i,<span class="number">1</span>);</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;++i)a[i]=read();</span><br><span class="line">		<span class="keyword">int</span> mx=<span class="number">0</span>,mn=<span class="number">1</span>;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;n;++i)&#123;</span><br><span class="line">			<span class="keyword">int</span> g=max(mx,a[i]);</span><br><span class="line">			<span class="keyword">int</span> f=qry(g)+<span class="number">1</span>;</span><br><span class="line">			<span class="keyword">int</span> d=n*<span class="number">2</span>-(i<span class="number">-1</span>)*<span class="number">2</span>-f;</span><br><span class="line">			res=(res+T(d,f))%lsk;</span><br><span class="line">			D[a[i]]=<span class="number">1</span>;add(a[i],<span class="number">-1</span>);</span><br><span class="line">			<span class="keyword">if</span>(a[i]&gt;mx)mx=a[i];</span><br><span class="line">			<span class="keyword">else</span>&#123;</span><br><span class="line">			    <span class="keyword">if</span>(a[i]!=mn)<span class="keyword">break</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">while</span>(D[mn])++mn;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"%lld\n"</span>,res);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+            <div class="post-copyright">
+    <div class="content">
+        <p>最后更新： 2019年01月14日 18:47</p>
+        <p>原始链接： <a class="post-url" href="/2018/07/19/noi18b/" title="NOI2018冒泡排序(inverse)">http://tenecnt.github.io/2018/07/19/noi18b/</a></p>
+        <footer>
+            <a href="http://tenecnt.github.io">
+                <img src="/images/head.png" alt="tenecnt">
+                tenecnt
+            </a>
+        </footer>
+    </div>
+</div>
+
+      
+        
+            
+
+        
+    </div>
+    <footer class="article-footer">
+        
+        
+<div class="post-share">
+    <a href="javascript:;" id="share-sub" class="post-share-fab">
+        <i class="fa fa-share-alt"></i>
+    </a>
+    <div class="post-share-list" id="share-list">
+        <ul class="share-icons">
+          <li>
+            <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://tenecnt.github.io/2018/07/19/noi18b/&title=《NOI2018冒泡排序(inverse)》 — tenecnt's blog&pic=http://tenecnt.github.ioimages/head.png" data-title="微博">
+              <i class="fa fa-weibo"></i>
+            </a>
+          </li>
+          <li>
+            <a class="weixin share-sns" id="wxFab" href="javascript:;" data-title="微信">
+              <i class="fa fa-weixin"></i>
+            </a>
+          </li>
+          <li>
+            <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://tenecnt.github.io/2018/07/19/noi18b/&title=《NOI2018冒泡排序(inverse)》 — tenecnt's blog&source=" data-title="QQ">
+              <i class="fa fa-qq"></i>
+            </a>
+          </li>
+          <li>
+            <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://tenecnt.github.io/2018/07/19/noi18b/" data-title="Facebook">
+              <i class="fa fa-facebook"></i>
+            </a>
+          </li>
+          <li>
+            <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《NOI2018冒泡排序(inverse)》 — tenecnt's blog&url=http://tenecnt.github.io/2018/07/19/noi18b/&via=http://tenecnt.github.io" data-title="Twitter">
+              <i class="fa fa-twitter"></i>
+            </a>
+          </li>
+          <li>
+            <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://tenecnt.github.io/2018/07/19/noi18b/" data-title="Google+">
+              <i class="fa fa-google-plus"></i>
+            </a>
+          </li>
+        </ul>
+     </div>
+</div>
+<div class="post-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;" id="wxShare-close">×</a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://tenecnt.github.io/2018/07/19/noi18b/" alt="微信分享二维码">
+</div>
+
+<div class="mask"></div>
+
+        
+        <ul class="article-footer-menu">
+            
+            
+  <li class="article-footer-tags">
+    <i class="fa fa-tags"></i>
+      
+    <a href="/tags/组合数学/" class="color5">组合数学</a>
+      
+    <a href="/tags/NOI/" class="color4">NOI</a>
+      
+  </li>
+
+        </ul>
+        
+    </footer>
+  </div>
+</article>
+
+
+    <aside class="post-toc-pos post-toc-top" id="post-toc">
+        <nav class="post-toc-wrap">
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#80"><span class="post-toc-text">80</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#100"><span class="post-toc-text">100</span></a></li></ol>
+        </nav>
+    </aside>
+    
+
+<nav id="article-nav">
+  
+    <a href="/2018/07/22/noi18d/" id="article-nav-newer" class="article-nav-link-wrap">
+
+      <span class="article-nav-title">
+        <i class="fa fa-hand-o-left" aria-hidden="true"></i>
+        
+          NOI2018屠龙勇士(dragon)
+        
+      </span>
+    </a>
+  
+  
+    <a href="/2018/07/19/noi18a/" id="article-nav-older" class="article-nav-link-wrap">
+      <span class="article-nav-title">NOI2018归程(return)</span>
+      <i class="fa fa-hand-o-right" aria-hidden="true"></i>
+    </a>
+  
+</nav>
+
+
+
+    
+
+
+
+</section>
+        
+      </div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+      <p>
+        Powered by  <a href="http://hexo.io/" target="_blank">Hexo</a>
+        Theme <a href="//github.com/wongminho/hexo-theme-miho" target="_blank">MiHo</a>
+      &copy; 2019 tenecnt<br>
+      </p>
+    </div>
+
+    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script>
+  var mihoConfig = {
+      root: "http://tenecnt.github.io",
+      animate: true,
+      isHome: false,
+      share: true,
+      reward: 0
+  }
+</script>
+<div class="sidebar">
+    <div id="sidebar-search" title="Search">
+        <i class="fa fa-search"></i>
+    </div>
+    <div id="sidebar-category" title="Categories">
+        <i class="fa fa-book"></i>
+    </div>
+    <div id="sidebar-tag" title="Tags">
+        <i class="fa fa-tags"></i>
+    </div>
+    <div id="sidebar-top">
+        <span class="sidebar-top-icon"><i class="fa fa-angle-up"></i></span>
+    </div>
+</div>
+<div class="sidebar-menu-box" id="sidebar-menu-box">
+    <div class="sidebar-menu-box-container">
+        <div id="sidebar-menu-box-categories">
+            
+        </div>
+        <div id="sidebar-menu-box-tags">
+            <a href="/tags/线性规划/" style="font-size: 10px;">-线性规划</a> <a href="/tags/CRT/" style="font-size: 10px;">CRT</a> <a href="/tags/NOI/" style="font-size: 15px;">NOI</a> <a href="/tags/fwt/" style="font-size: 10px;">fwt</a> <a href="/tags/lct/" style="font-size: 10px;">lct</a> <a href="/tags/math/" style="font-size: 10px;">math</a> <a href="/tags/suffix/" style="font-size: 10px;">suffix</a> <a href="/tags/乱搞/" style="font-size: 10px;">乱搞</a> <a href="/tags/交互题/" style="font-size: 10px;">交互题</a> <a href="/tags/后缀自动机/" style="font-size: 10px;">后缀自动机</a> <a href="/tags/图论/" style="font-size: 20px;">图论</a> <a href="/tags/多项式/" style="font-size: 15px;">多项式</a> <a href="/tags/字符串/" style="font-size: 15px;">字符串</a> <a href="/tags/数列/" style="font-size: 15px;">数列</a> <a href="/tags/数据结构/" style="font-size: 10px;">数据结构</a> <a href="/tags/数论/" style="font-size: 15px;">数论</a> <a href="/tags/数论筛/" style="font-size: 10px;">数论筛</a> <a href="/tags/最大团/" style="font-size: 10px;">最大团</a> <a href="/tags/树状数组/" style="font-size: 10px;">树状数组</a> <a href="/tags/生成树/" style="font-size: 10px;">生成树</a> <a href="/tags/线性基/" style="font-size: 10px;">线性基</a> <a href="/tags/组合数学/" style="font-size: 15px;">组合数学</a> <a href="/tags/规划/" style="font-size: 10px;">规划</a> <a href="/tags/试验/" style="font-size: 10px;">试验</a> <a href="/tags/递推式/" style="font-size: 15px;">递推式</a>
+        </div>
+    </div>
+    <a href="javascript:;" class="sidebar-menu-box-close">&times;</a>
+</div>
+<div class="mobile-header-menu-nav" id="mobile-header-menu-nav">
+    <div class="mobile-header-menu-container">
+        <span class="title">Menus</span>
+        <ul class="mobile-header-menu-navbar">
+            
+            <li>
+                <a  href="/">
+                    <i class="fa fa-home"></i><span>Home</span>
+                </a>
+            </li>
+            
+            <li>
+                <a  href="/archives">
+                    <i class="fa fa-archive"></i><span>Archives</span>
+                </a>
+            </li>
+            
+            <li>
+                <a  href="/friends">
+                    <i class="fa fa-user"></i><span>friends</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    <div class="mobile-header-tag-container">
+        <span class="title">Tags</span>
+        <div id="mobile-header-container-tags">
+            <a href="/tags/线性规划/" style="font-size: 10px;">-线性规划</a> <a href="/tags/CRT/" style="font-size: 10px;">CRT</a> <a href="/tags/NOI/" style="font-size: 15px;">NOI</a> <a href="/tags/fwt/" style="font-size: 10px;">fwt</a> <a href="/tags/lct/" style="font-size: 10px;">lct</a> <a href="/tags/math/" style="font-size: 10px;">math</a> <a href="/tags/suffix/" style="font-size: 10px;">suffix</a> <a href="/tags/乱搞/" style="font-size: 10px;">乱搞</a> <a href="/tags/交互题/" style="font-size: 10px;">交互题</a> <a href="/tags/后缀自动机/" style="font-size: 10px;">后缀自动机</a> <a href="/tags/图论/" style="font-size: 20px;">图论</a> <a href="/tags/多项式/" style="font-size: 15px;">多项式</a> <a href="/tags/字符串/" style="font-size: 15px;">字符串</a> <a href="/tags/数列/" style="font-size: 15px;">数列</a> <a href="/tags/数据结构/" style="font-size: 10px;">数据结构</a> <a href="/tags/数论/" style="font-size: 15px;">数论</a> <a href="/tags/数论筛/" style="font-size: 10px;">数论筛</a> <a href="/tags/最大团/" style="font-size: 10px;">最大团</a> <a href="/tags/树状数组/" style="font-size: 10px;">树状数组</a> <a href="/tags/生成树/" style="font-size: 10px;">生成树</a> <a href="/tags/线性基/" style="font-size: 10px;">线性基</a> <a href="/tags/组合数学/" style="font-size: 15px;">组合数学</a> <a href="/tags/规划/" style="font-size: 10px;">规划</a> <a href="/tags/试验/" style="font-size: 10px;">试验</a> <a href="/tags/递推式/" style="font-size: 15px;">递推式</a>
+        </div>
+    </div>
+</div>
+<div class="search-wrap">
+    <span class="search-close">&times;</span>
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+            <i class="icon icon-lg icon-chevron-left"></i>
+        </a>
+        <input class="search-field" placeholder="Search..." id="keywords">
+        <a id="search-submit" href="javascript:;">
+            <i class="fa fa-search"></i>
+        </a>
+    <div class="search-container" id="search-container">
+        <ul class="search-result" id="search-result">
+        </ul>
+    </div>
+</div>
+
+<div id="search-tpl">
+    <li class="search-result-item">
+        <a href="{url}" class="search-item-li">
+            <span class="search-item-li-title" title="{title}">{title}</span>
+        </a>
+    </li>
+</div>
+
+<script src="/js/search.js"></script>
+<script src="/js/main.js"></script>
+
+
+  <script src="//cdn.bootcss.com/particles.js/2.0.0/particles.min.js"></script>
+  <div id="particles"></div>
+  <script src="/js/particles.js"></script>
+
+
+
+
+
+
+
+  <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
+  <script src="//cdn.bootcss.com/scrollReveal.js/3.0.5/scrollreveal.js"></script>
+  <script src="/js/animate.js"></script>
+
+
+  <script src="/js/pop-img.js"></script>
+  <script>
+     $(".article-entry p img").popImg();
+  </script>
+
+  </div><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config("");
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="custom_mathjax_source">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+</body>
+</html>

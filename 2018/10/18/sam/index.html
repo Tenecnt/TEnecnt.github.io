@@ -1,0 +1,440 @@
+<script>
+  fetch('https://v1.hitokoto.cn')
+    .then(function (res){
+      return res.json();
+    })
+    .then(function (data) {
+      var hitokoto = document.getElementById('hitokoto');
+      hitokoto.innerText = "『 " + data.hitokoto + " 』";
+      var from = document.getElementById('hitokoto-from');
+      from.innerText = "——" + data.from + "\b\b\b\b\b\b\b\b\b";
+    })
+    .catch(function (err) {
+      console.error(err);
+    })
+</script>
+<!DOCTYPE html>
+<html>
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+  
+  <title>Suffix Automaton重学 | tenecnt&#39;s blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+    <meta name="keywords" content="2333" />
+  
+  
+  <meta name="description" content="重新学习了sam 对于sam的建造过程和证明就不讲了,只贴板子 12345678910111213141516171819202122232425262728293031323334353637383940414243namespace Yuuki&amp;#123;	int last,tot;	struct Node&amp;#123;		int slink,len,tran[26];		int MAX,MIN">
+<meta name="keywords" content="字符串,后缀自动机,suffix">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Suffix Automaton重学">
+<meta property="og:url" content="http://tenecnt.github.io/2018/10/18/sam/index.html">
+<meta property="og:site_name" content="tenecnt&#39;s blog">
+<meta property="og:description" content="重新学习了sam 对于sam的建造过程和证明就不讲了,只贴板子 12345678910111213141516171819202122232425262728293031323334353637383940414243namespace Yuuki&amp;#123;	int last,tot;	struct Node&amp;#123;		int slink,len,tran[26];		int MAX,MIN">
+<meta property="og:locale" content="中文">
+<meta property="og:updated_time" content="2019-01-14T10:47:24.892Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Suffix Automaton重学">
+<meta name="twitter:description" content="重新学习了sam 对于sam的建造过程和证明就不讲了,只贴板子 12345678910111213141516171819202122232425262728293031323334353637383940414243namespace Yuuki&amp;#123;	int last,tot;	struct Node&amp;#123;		int slink,len,tran[26];		int MAX,MIN">
+  
+  
+    <link rel="icon" href="/Gus.ico">
+  
+  <link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css">
+  <script src="/js/pace.min.js"></script>
+  <script src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-122354200-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics --><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+  
+  
+
+</head>
+
+<body>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="container">
+      <header id="header">
+    <div id="banner"></div>
+    <div id="header-outer">
+        <div id="header-menu" class="header-menu-pos animated">
+            <div class="header-menu-container">
+                <a href="/" class="left">
+                    <span class="site-title">Tenecnt&#39;s Blog</span>
+                </a>
+                <nav id="header-menu-nav" class="right">
+                    
+                    <a  href="/">
+                        <i class="fa fa-home"></i>
+                        <span>Home</span>
+                    </a>
+                    
+                    <a  href="/archives">
+                        <i class="fa fa-archive"></i>
+                        <span>Archives</span>
+                    </a>
+                    
+                    <a  href="/friends">
+                        <i class="fa fa-user"></i>
+                        <span>friends</span>
+                    </a>
+                    
+                </nav>
+                <a class="mobile-header-menu-button">
+                    <i class="fa fa-bars"></i>
+                </a>
+            </div>
+        </div>
+        <div id="header-row">
+            <div id="logo">
+                <a href="/">
+                    <img src="/images/head.png" alt="logo">
+                </a>
+            </div>
+            <div class="header-info">
+                <div id="header-title">
+                    
+                    <h2>
+                        Tenecnt&#39;s Blog
+                    </h2>
+                    
+                </div>
+                <div id="header-description">
+                    
+                    <h3>
+                        2333
+                    </h3>
+                    
+                </div>
+            </div>
+            <nav class="header-nav">
+                <div class="social">
+                    
+                        <a title="2333" target="_blank" href="//teencnt.github.com">
+                            <i class="fa fa-home fa-2x"></i></a>
+                    
+                        <a title="Github" target="_blank" href="//github.com/tenecnt">
+                            <i class="fa fa-github fa-2x"></i></a>
+                    
+                        <a title="Twitter" target="_blank" href="//twitter.com/tenecnt">
+                            <i class="fa fa-twitter fa-2x"></i></a>
+                    
+                </div>
+            </nav>
+        </div>
+    </div>
+</header>
+      <div class="outer">
+
+        <section id="main" class="body-wrap">
+<article id="post-sam" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="post-title" itemprop="name">
+      Suffix Automaton重学
+    </h1>
+    <div class="post-title-bar">
+      <ul>
+          
+        <li>
+          <i class="fa fa-calendar"></i>  2018-10-18
+        </li>
+        <li>
+          <i class="fa fa-eye"></i>
+          <span id="busuanzi_value_page_pv"></span>
+          
+        </li>
+      </ul>
+    </div>
+  
+
+
+          
+      </header>
+    
+    <div class="article-entry post-content" itemprop="articleBody">
+      
+            
+            <p>重新学习了sam</p>
+<p>对于sam的建造过程和证明就不讲了,只贴板子</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">namespace</span> Yuuki&#123;</span><br><span class="line">	<span class="keyword">int</span> last,tot;</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">Node</span>&#123;</span></span><br><span class="line">		<span class="keyword">int</span> slink,len,tran[<span class="number">26</span>];</span><br><span class="line">		<span class="keyword">int</span> MAX,MIN,cnt;</span><br><span class="line">		Node(<span class="keyword">int</span> _min=<span class="number">0</span>,<span class="keyword">int</span> _max=<span class="number">0</span>,<span class="keyword">int</span> _cnt=<span class="number">0</span>)&#123;</span><br><span class="line">			<span class="built_in">memset</span>(tran,<span class="number">-1</span>,<span class="keyword">sizeof</span> tran);</span><br><span class="line">			slink=<span class="number">0</span>;len=<span class="number">0</span>;</span><br><span class="line">			MAX=_max,MIN=_min,cnt=_cnt;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;N[MN];</span><br><span class="line"></span><br><span class="line">	<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; Sons[MN];</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">add</span><span class="params">(<span class="keyword">char</span> C,<span class="keyword">int</span> v)</span></span>&#123;</span><br><span class="line">		<span class="keyword">int</span> c=C-<span class="string">'a'</span>;</span><br><span class="line">		<span class="keyword">int</span> z=tot++,l=last;</span><br><span class="line">		N[z]=Node(v,v,<span class="number">1</span>);</span><br><span class="line">		N[z].len=N[l].len+<span class="number">1</span>;</span><br><span class="line">		last=z;</span><br><span class="line">		<span class="keyword">while</span>((~l)&amp;&amp;N[l].tran[c]==<span class="number">-1</span>)&#123;</span><br><span class="line">			N[l].tran[c]=z;</span><br><span class="line">			l=N[l].slink;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span>(l==<span class="number">-1</span>)<span class="keyword">return</span> (<span class="keyword">void</span>)(N[z].slink=<span class="number">0</span>);</span><br><span class="line">		<span class="keyword">int</span> g=N[l].tran[c];</span><br><span class="line">		<span class="keyword">if</span>(N[l].len+<span class="number">1</span>==N[g].len)<span class="keyword">return</span> (<span class="keyword">void</span>)(N[z].slink=g);</span><br><span class="line">		<span class="keyword">int</span> y=tot++;</span><br><span class="line">		N[y]=N[g];</span><br><span class="line">		N[y].len=N[l].len+<span class="number">1</span>;</span><br><span class="line">		N[y].cnt=<span class="number">0</span>;N[y].MAX=<span class="number">-0x3f3f3f3f</span>;N[y].MIN=<span class="number">0x3f3f3f3f</span>;</span><br><span class="line">		N[g].slink=N[z].slink=y;</span><br><span class="line">		<span class="keyword">while</span>((~l)&amp;&amp;N[l].tran[c]==g)&#123;</span><br><span class="line">			N[l].tran[c]=y;</span><br><span class="line">			l=N[l].slink;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">build</span><span class="params">()</span></span>&#123;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;++i)add(c[i],a[i]);</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;tot;++i)Sons[N[i].slink].pb(i);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>再来一道<a href="https://loj.ac/problem/2133" target="_blank" rel="noopener">模板题</a></p>
+<p>大致就是求出每个长度的相同子串对个数以及这些对中起始位权值乘积最大值</p>
+<p>做法就是反转串,然后在slink树上找子树最大乘积与子树个数和,最后前缀和差分处理即可</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> pii pair<span class="meta-string">&lt;int,int&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> mp make_pair</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> pb push_back</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> lg long long</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> db double</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> lb(x) ((x)&amp;-(x))</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> ft first</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> sd second</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LLLINE cerr&lt;&lt;<span class="meta-string">"@@@@@@@@@@@@@@@@@@@@"</span>&lt;&lt;endl</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> _<span class="title">T_</span>&gt;</span></span><br><span class="line"><span class="class"><span class="title">void</span> <span class="title">read</span>(_<span class="title">T_</span>&amp; <span class="title">d</span>)&#123;</span></span><br><span class="line">	d=<span class="number">0</span>;<span class="keyword">int</span> f=<span class="number">1</span>;<span class="keyword">char</span> c=getchar();</span><br><span class="line">	<span class="keyword">for</span>(;c&lt;<span class="string">'0'</span>||c&gt;<span class="string">'9'</span>;c=getchar())<span class="keyword">if</span>(c==<span class="string">'-'</span>)f*=<span class="number">-1</span>;</span><br><span class="line">	<span class="keyword">for</span>(;c&gt;=<span class="string">'0'</span>&amp;&amp;c&lt;=<span class="string">'9'</span>;c=getchar())d=d*<span class="number">10</span>+c-<span class="string">'0'</span>;</span><br><span class="line">	d*=f;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/************************************************/</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MN 600005</span></span><br><span class="line"><span class="keyword">int</span> n;</span><br><span class="line"><span class="keyword">char</span> c[MN];</span><br><span class="line"><span class="keyword">int</span> a[MN];</span><br><span class="line">lg res[MN],cnt[MN];</span><br><span class="line"><span class="keyword">namespace</span> Yuuki&#123;</span><br><span class="line">	<span class="keyword">int</span> last,tot;</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">Node</span>&#123;</span></span><br><span class="line">		<span class="keyword">int</span> slink,len,tran[<span class="number">26</span>];</span><br><span class="line">		<span class="keyword">int</span> MAX,MIN,cnt;</span><br><span class="line">		Node(<span class="keyword">int</span> _min=<span class="number">0</span>,<span class="keyword">int</span> _max=<span class="number">0</span>,<span class="keyword">int</span> _cnt=<span class="number">0</span>)&#123;</span><br><span class="line">			<span class="built_in">memset</span>(tran,<span class="number">-1</span>,<span class="keyword">sizeof</span> tran);</span><br><span class="line">			slink=<span class="number">0</span>;len=<span class="number">0</span>;</span><br><span class="line">			MAX=_max,MIN=_min,cnt=_cnt;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;N[MN];</span><br><span class="line"></span><br><span class="line">	<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; Sons[MN];</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">add</span><span class="params">(<span class="keyword">char</span> C,<span class="keyword">int</span> v)</span></span>&#123;</span><br><span class="line">		<span class="keyword">int</span> c=C-<span class="string">'a'</span>;</span><br><span class="line">		<span class="keyword">int</span> z=tot++,l=last;</span><br><span class="line">		N[z]=Node(v,v,<span class="number">1</span>);</span><br><span class="line">		N[z].len=N[l].len+<span class="number">1</span>;</span><br><span class="line">		last=z;</span><br><span class="line">		<span class="keyword">while</span>((~l)&amp;&amp;N[l].tran[c]==<span class="number">-1</span>)&#123;</span><br><span class="line">			N[l].tran[c]=z;</span><br><span class="line">			l=N[l].slink;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span>(l==<span class="number">-1</span>)<span class="keyword">return</span> (<span class="keyword">void</span>)(N[z].slink=<span class="number">0</span>);</span><br><span class="line">		<span class="keyword">int</span> g=N[l].tran[c];</span><br><span class="line">		<span class="keyword">if</span>(N[l].len+<span class="number">1</span>==N[g].len)<span class="keyword">return</span> (<span class="keyword">void</span>)(N[z].slink=g);</span><br><span class="line">		<span class="keyword">int</span> y=tot++;</span><br><span class="line">		N[y]=N[g];</span><br><span class="line">		N[y].len=N[l].len+<span class="number">1</span>;</span><br><span class="line">		N[y].cnt=<span class="number">0</span>;N[y].MAX=<span class="number">-0x3f3f3f3f</span>;N[y].MIN=<span class="number">0x3f3f3f3f</span>;</span><br><span class="line">		N[g].slink=N[z].slink=y;</span><br><span class="line">		<span class="keyword">while</span>((~l)&amp;&amp;N[l].tran[c]==g)&#123;</span><br><span class="line">			N[l].tran[c]=y;</span><br><span class="line">			l=N[l].slink;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">build</span><span class="params">()</span></span>&#123;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;++i)add(c[i],a[i]);</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;tot;++i)Sons[N[i].slink].pb(i);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">init</span><span class="params">()</span></span>&#123;</span><br><span class="line">		last=<span class="number">0</span>;tot=<span class="number">1</span>;</span><br><span class="line">		N[<span class="number">0</span>]=Node(<span class="number">0x3f3f3f3f</span>,<span class="number">-0x3f3f3f3f</span>,<span class="number">0</span>);</span><br><span class="line">		N[<span class="number">0</span>].slink=<span class="number">-1</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> chmax(x,y) (x&lt;y)?(x=y):0</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> chmin(x,y) (x&gt;y)?(x=y):0</span></span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> x)</span></span>&#123;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i:Sons[x])&#123;</span><br><span class="line">			dfs(i);</span><br><span class="line">			<span class="keyword">if</span>(N[x].cnt&gt;=<span class="number">1</span>)chmax(res[N[x].len],<span class="number">1l</span>l*N[i].MAX*N[x].MAX);</span><br><span class="line">			<span class="keyword">if</span>(N[x].cnt&gt;=<span class="number">1</span>)chmax(res[N[x].len],<span class="number">1l</span>l*N[i].MIN*N[x].MIN);</span><br><span class="line">			N[x].cnt+=N[i].cnt;</span><br><span class="line">			chmax(N[x].MAX,N[i].MAX);</span><br><span class="line">			chmin(N[x].MIN,N[i].MIN);</span><br><span class="line">		&#125;</span><br><span class="line">		cnt[N[x].len]+=<span class="number">1l</span>l*N[x].cnt*(N[x].cnt<span class="number">-1</span>)/<span class="number">2</span>;</span><br><span class="line">		<span class="keyword">if</span>(x&amp;&amp;N[N[x].slink].len&gt;=<span class="number">0</span>)cnt[N[N[x].slink].len]-=<span class="number">1l</span>l*N[x].cnt*(N[x].cnt<span class="number">-1</span>)/<span class="number">2</span>;;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">		dfs(<span class="number">0</span>);</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=n<span class="number">-2</span>;~i;--i)&#123;</span><br><span class="line">			chmax(res[i],res[i+<span class="number">1</span>]);</span><br><span class="line">			cnt[i]+=cnt[i+<span class="number">1</span>];</span><br><span class="line">			<span class="keyword">if</span>(!cnt[i+<span class="number">1</span>])res[i+<span class="number">1</span>]=<span class="number">0</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span>(!cnt[<span class="number">0</span>])res[<span class="number">0</span>]=<span class="number">0</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="built_in">memset</span>(res,<span class="number">-0x3f</span>,<span class="keyword">sizeof</span> res);</span><br><span class="line">	read(n);</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">"%s"</span>,c+<span class="number">1</span>);</span><br><span class="line">	reverse(c+<span class="number">1</span>,c+n+<span class="number">1</span>);</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;++i)read(a[i]);</span><br><span class="line">	reverse(a+<span class="number">1</span>,a+n+<span class="number">1</span>);</span><br><span class="line">	Yuuki::init();</span><br><span class="line">	Yuuki::build();</span><br><span class="line">	Yuuki::main();</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;n;++i)&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"%lld %lld\n"</span>,cnt[i],res[i]);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+            <div class="post-copyright">
+    <div class="content">
+        <p>最后更新： 2019年01月14日 18:47</p>
+        <p>原始链接： <a class="post-url" href="/2018/10/18/sam/" title="Suffix Automaton重学">http://tenecnt.github.io/2018/10/18/sam/</a></p>
+        <footer>
+            <a href="http://tenecnt.github.io">
+                <img src="/images/head.png" alt="tenecnt">
+                tenecnt
+            </a>
+        </footer>
+    </div>
+</div>
+
+      
+        
+            
+
+        
+    </div>
+    <footer class="article-footer">
+        
+        
+<div class="post-share">
+    <a href="javascript:;" id="share-sub" class="post-share-fab">
+        <i class="fa fa-share-alt"></i>
+    </a>
+    <div class="post-share-list" id="share-list">
+        <ul class="share-icons">
+          <li>
+            <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://tenecnt.github.io/2018/10/18/sam/&title=《Suffix Automaton重学》 — tenecnt's blog&pic=http://tenecnt.github.ioimages/head.png" data-title="微博">
+              <i class="fa fa-weibo"></i>
+            </a>
+          </li>
+          <li>
+            <a class="weixin share-sns" id="wxFab" href="javascript:;" data-title="微信">
+              <i class="fa fa-weixin"></i>
+            </a>
+          </li>
+          <li>
+            <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://tenecnt.github.io/2018/10/18/sam/&title=《Suffix Automaton重学》 — tenecnt's blog&source=" data-title="QQ">
+              <i class="fa fa-qq"></i>
+            </a>
+          </li>
+          <li>
+            <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://tenecnt.github.io/2018/10/18/sam/" data-title="Facebook">
+              <i class="fa fa-facebook"></i>
+            </a>
+          </li>
+          <li>
+            <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Suffix Automaton重学》 — tenecnt's blog&url=http://tenecnt.github.io/2018/10/18/sam/&via=http://tenecnt.github.io" data-title="Twitter">
+              <i class="fa fa-twitter"></i>
+            </a>
+          </li>
+          <li>
+            <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://tenecnt.github.io/2018/10/18/sam/" data-title="Google+">
+              <i class="fa fa-google-plus"></i>
+            </a>
+          </li>
+        </ul>
+     </div>
+</div>
+<div class="post-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;" id="wxShare-close">×</a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://tenecnt.github.io/2018/10/18/sam/" alt="微信分享二维码">
+</div>
+
+<div class="mask"></div>
+
+        
+        <ul class="article-footer-menu">
+            
+            
+  <li class="article-footer-tags">
+    <i class="fa fa-tags"></i>
+      
+    <a href="/tags/字符串/" class="color4">字符串</a>
+      
+    <a href="/tags/后缀自动机/" class="color1">后缀自动机</a>
+      
+    <a href="/tags/suffix/" class="color2">suffix</a>
+      
+  </li>
+
+        </ul>
+        
+    </footer>
+  </div>
+</article>
+
+
+
+<nav id="article-nav">
+  
+    <a href="/2019/01/14/Liner/" id="article-nav-newer" class="article-nav-link-wrap">
+
+      <span class="article-nav-title">
+        <i class="fa fa-hand-o-left" aria-hidden="true"></i>
+        
+          线性规划小记
+        
+      </span>
+    </a>
+  
+  
+    <a href="/2018/10/17/CH/" id="article-nav-older" class="article-nav-link-wrap">
+      <span class="article-nav-title">Cayley-Hamilton学习</span>
+      <i class="fa fa-hand-o-right" aria-hidden="true"></i>
+    </a>
+  
+</nav>
+
+
+
+    
+
+
+
+</section>
+        
+      </div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+      <p>
+        Powered by  <a href="http://hexo.io/" target="_blank">Hexo</a>
+        Theme <a href="//github.com/wongminho/hexo-theme-miho" target="_blank">MiHo</a>
+      &copy; 2019 tenecnt<br>
+      </p>
+    </div>
+
+    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script>
+  var mihoConfig = {
+      root: "http://tenecnt.github.io",
+      animate: true,
+      isHome: false,
+      share: true,
+      reward: 0
+  }
+</script>
+<div class="sidebar">
+    <div id="sidebar-search" title="Search">
+        <i class="fa fa-search"></i>
+    </div>
+    <div id="sidebar-category" title="Categories">
+        <i class="fa fa-book"></i>
+    </div>
+    <div id="sidebar-tag" title="Tags">
+        <i class="fa fa-tags"></i>
+    </div>
+    <div id="sidebar-top">
+        <span class="sidebar-top-icon"><i class="fa fa-angle-up"></i></span>
+    </div>
+</div>
+<div class="sidebar-menu-box" id="sidebar-menu-box">
+    <div class="sidebar-menu-box-container">
+        <div id="sidebar-menu-box-categories">
+            
+        </div>
+        <div id="sidebar-menu-box-tags">
+            <a href="/tags/线性规划/" style="font-size: 10px;">-线性规划</a> <a href="/tags/CRT/" style="font-size: 10px;">CRT</a> <a href="/tags/NOI/" style="font-size: 15px;">NOI</a> <a href="/tags/fwt/" style="font-size: 10px;">fwt</a> <a href="/tags/lct/" style="font-size: 10px;">lct</a> <a href="/tags/math/" style="font-size: 10px;">math</a> <a href="/tags/suffix/" style="font-size: 10px;">suffix</a> <a href="/tags/乱搞/" style="font-size: 10px;">乱搞</a> <a href="/tags/交互题/" style="font-size: 10px;">交互题</a> <a href="/tags/后缀自动机/" style="font-size: 10px;">后缀自动机</a> <a href="/tags/图论/" style="font-size: 20px;">图论</a> <a href="/tags/多项式/" style="font-size: 15px;">多项式</a> <a href="/tags/字符串/" style="font-size: 15px;">字符串</a> <a href="/tags/数列/" style="font-size: 15px;">数列</a> <a href="/tags/数据结构/" style="font-size: 10px;">数据结构</a> <a href="/tags/数论/" style="font-size: 15px;">数论</a> <a href="/tags/数论筛/" style="font-size: 10px;">数论筛</a> <a href="/tags/最大团/" style="font-size: 10px;">最大团</a> <a href="/tags/树状数组/" style="font-size: 10px;">树状数组</a> <a href="/tags/生成树/" style="font-size: 10px;">生成树</a> <a href="/tags/线性基/" style="font-size: 10px;">线性基</a> <a href="/tags/组合数学/" style="font-size: 15px;">组合数学</a> <a href="/tags/规划/" style="font-size: 10px;">规划</a> <a href="/tags/试验/" style="font-size: 10px;">试验</a> <a href="/tags/递推式/" style="font-size: 15px;">递推式</a>
+        </div>
+    </div>
+    <a href="javascript:;" class="sidebar-menu-box-close">&times;</a>
+</div>
+<div class="mobile-header-menu-nav" id="mobile-header-menu-nav">
+    <div class="mobile-header-menu-container">
+        <span class="title">Menus</span>
+        <ul class="mobile-header-menu-navbar">
+            
+            <li>
+                <a  href="/">
+                    <i class="fa fa-home"></i><span>Home</span>
+                </a>
+            </li>
+            
+            <li>
+                <a  href="/archives">
+                    <i class="fa fa-archive"></i><span>Archives</span>
+                </a>
+            </li>
+            
+            <li>
+                <a  href="/friends">
+                    <i class="fa fa-user"></i><span>friends</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    <div class="mobile-header-tag-container">
+        <span class="title">Tags</span>
+        <div id="mobile-header-container-tags">
+            <a href="/tags/线性规划/" style="font-size: 10px;">-线性规划</a> <a href="/tags/CRT/" style="font-size: 10px;">CRT</a> <a href="/tags/NOI/" style="font-size: 15px;">NOI</a> <a href="/tags/fwt/" style="font-size: 10px;">fwt</a> <a href="/tags/lct/" style="font-size: 10px;">lct</a> <a href="/tags/math/" style="font-size: 10px;">math</a> <a href="/tags/suffix/" style="font-size: 10px;">suffix</a> <a href="/tags/乱搞/" style="font-size: 10px;">乱搞</a> <a href="/tags/交互题/" style="font-size: 10px;">交互题</a> <a href="/tags/后缀自动机/" style="font-size: 10px;">后缀自动机</a> <a href="/tags/图论/" style="font-size: 20px;">图论</a> <a href="/tags/多项式/" style="font-size: 15px;">多项式</a> <a href="/tags/字符串/" style="font-size: 15px;">字符串</a> <a href="/tags/数列/" style="font-size: 15px;">数列</a> <a href="/tags/数据结构/" style="font-size: 10px;">数据结构</a> <a href="/tags/数论/" style="font-size: 15px;">数论</a> <a href="/tags/数论筛/" style="font-size: 10px;">数论筛</a> <a href="/tags/最大团/" style="font-size: 10px;">最大团</a> <a href="/tags/树状数组/" style="font-size: 10px;">树状数组</a> <a href="/tags/生成树/" style="font-size: 10px;">生成树</a> <a href="/tags/线性基/" style="font-size: 10px;">线性基</a> <a href="/tags/组合数学/" style="font-size: 15px;">组合数学</a> <a href="/tags/规划/" style="font-size: 10px;">规划</a> <a href="/tags/试验/" style="font-size: 10px;">试验</a> <a href="/tags/递推式/" style="font-size: 15px;">递推式</a>
+        </div>
+    </div>
+</div>
+<div class="search-wrap">
+    <span class="search-close">&times;</span>
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+            <i class="icon icon-lg icon-chevron-left"></i>
+        </a>
+        <input class="search-field" placeholder="Search..." id="keywords">
+        <a id="search-submit" href="javascript:;">
+            <i class="fa fa-search"></i>
+        </a>
+    <div class="search-container" id="search-container">
+        <ul class="search-result" id="search-result">
+        </ul>
+    </div>
+</div>
+
+<div id="search-tpl">
+    <li class="search-result-item">
+        <a href="{url}" class="search-item-li">
+            <span class="search-item-li-title" title="{title}">{title}</span>
+        </a>
+    </li>
+</div>
+
+<script src="/js/search.js"></script>
+<script src="/js/main.js"></script>
+
+
+  <script src="//cdn.bootcss.com/particles.js/2.0.0/particles.min.js"></script>
+  <div id="particles"></div>
+  <script src="/js/particles.js"></script>
+
+
+
+
+
+
+
+  <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
+  <script src="//cdn.bootcss.com/scrollReveal.js/3.0.5/scrollreveal.js"></script>
+  <script src="/js/animate.js"></script>
+
+
+  <script src="/js/pop-img.js"></script>
+  <script>
+     $(".article-entry p img").popImg();
+  </script>
+
+  </div><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</body>
+</html>
